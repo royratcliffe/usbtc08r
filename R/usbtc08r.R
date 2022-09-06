@@ -11,3 +11,14 @@ open_units <- function() {
   }
   handles
 }
+
+#' Unit
+#' @export
+unit <- function(x) {
+  structure(x, class = "usbtc08")
+}
+
+#' @export
+last_error <- function(x, ...) {
+  UseMethod("last_error", x)
+}
