@@ -18,6 +18,16 @@ unit <- function(x) {
   structure(x, class = "usbtc08")
 }
 
+#' @export
+channel <- function(x, ...) {
+  UseMethod("channel", x)
+}
+
+#' @export
+tc_type <- function(x, ...) {
+  UseMethod("tc_type", x)
+}
+
 #' Last Error for TC-08 Unit
 #' @export
 last_error <- function(x, ...) {
