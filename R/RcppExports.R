@@ -89,3 +89,7 @@ get_last_error <- function(handle) {
     .Call(`_usbtc08r_get_last_error`, handle)
 }
 
+error <- function() {
+    .Call(`_usbtc08r_error`)
+}
+

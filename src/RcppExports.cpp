@@ -137,13 +137,23 @@ BEGIN_RCPP
 END_RCPP
 }
 // get_last_error
-int get_last_error(int handle);
+short get_last_error(short handle);
 RcppExport SEXP _usbtc08r_get_last_error(SEXP handleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type handle(handleSEXP);
+    Rcpp::traits::input_parameter< short >::type handle(handleSEXP);
     rcpp_result_gen = Rcpp::wrap(get_last_error(handle));
+    return rcpp_result_gen;
+END_RCPP
+}
+// error
+IntegerVector error();
+RcppExport SEXP _usbtc08r_error() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(error());
     return rcpp_result_gen;
 END_RCPP
 }
@@ -161,6 +171,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_usbtc08r_get_single", (DL_FUNC) &_usbtc08r_get_single, 2},
     {"_usbtc08r_get_unit_info", (DL_FUNC) &_usbtc08r_get_unit_info, 1},
     {"_usbtc08r_get_last_error", (DL_FUNC) &_usbtc08r_get_last_error, 1},
+    {"_usbtc08r_error", (DL_FUNC) &_usbtc08r_error, 0},
     {NULL, NULL, 0}
 };
 

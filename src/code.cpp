@@ -147,6 +147,50 @@ Nullable<List> get_unit_info(int handle) {
 //' Get Last Error
 //' @export
 // [[Rcpp::export]]
-int get_last_error(int handle) {
+short get_last_error(short handle) {
   return usb_tc08_get_last_error(handle);
+}
+
+// all(usbtc08r:::error() == 0:15)
+// [1] TRUE
+// [[Rcpp::export]]
+IntegerVector error() {
+  IntegerVector x {
+    USBTC08_ERROR_OK,
+    USBTC08_ERROR_OS_NOT_SUPPORTED,
+    USBTC08_ERROR_NO_CHANNELS_SET,
+    USBTC08_ERROR_INVALID_PARAMETER,
+    USBTC08_ERROR_VARIANT_NOT_SUPPORTED,
+    USBTC08_ERROR_INCORRECT_MODE,
+    USBTC08_ERROR_ENUMERATION_INCOMPLETE,
+    USBTC08_ERROR_NOT_RESPONDING,
+    USBTC08_ERROR_FW_FAIL,
+    USBTC08_ERROR_CONFIG_FAIL,
+    USBTC08_ERROR_NOT_FOUND,
+    USBTC08_ERROR_THREAD_FAIL,
+    USBTC08_ERROR_PIPE_INFO_FAIL,
+    USBTC08_ERROR_NOT_CALIBRATED,
+    // typo
+    USBTC08_EROOR_PICOPP_TOO_OLD,
+    USBTC08_ERROR_COMMUNICATION,
+  };
+  x.names() = CharacterVector {
+    "ok",
+    "OS_NOT_SUPPORTED",
+    "NO_CHANNELS_SET",
+    "INVALID_PARAMETER",
+    "VARIANT_NOT_SUPPORTED",
+    "INCORRECT_MODE",
+    "ENUMERATION_INCOMPLETE",
+    "NOT_RESPONDING",
+    "FW_FAIL",
+    "CONFIG_FAIL",
+    "NOT_FOUND",
+    "THREAD_FAIL",
+    "PIPE_INFO_FAIL",
+    "NOT_CALIBRATED",
+    "PICOPP_TOO_OLD",
+    "COMMUNICATION",
+  };
+  return x;
 }
