@@ -5,12 +5,10 @@ channel.usbtc08 <- function(x, channel, tc_type) {
 
 #' @export
 tc_type.usbtc08 <- function(x, ...) {
-  args <- list(...)
-  tc_type <- names(args)
-  for (i in seq_along(args)) {
-    for (channel in args[[i]]) {
-      set_channel(x, channel, tc_type[i])
-    }
+  dots <- list(...)
+  tc_type <- names(dots)
+  for (i in seq_along(dots)) for (channel in dots[[i]]) {
+    set_channel(x, channel, tc_type[i])
   }
 }
 
