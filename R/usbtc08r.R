@@ -9,7 +9,7 @@ open_units <- function() {
     stopifnot("unit handle must be positive" = handle > 0L)
     handles <- c(handles, handle)
   }
-  handles
+  unit(handles)
 }
 
 #' Unit
@@ -18,6 +18,7 @@ unit <- function(x) {
   structure(x, class = "usbtc08")
 }
 
+#' Last Error for TC-08 Unit
 #' @export
 last_error <- function(x, ...) {
   UseMethod("last_error", x)
