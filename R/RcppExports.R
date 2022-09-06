@@ -14,9 +14,73 @@ open_unit_async <- function() {
 }
 
 #' Open Unit Progress
+#' @details The handle only makes sense on completion, never on pending or failure.
 #' @export
 open_unit_progress <- function() {
     .Call(`_usbtc08r_open_unit_progress`)
+}
+
+#' Close Unit
+#' @export
+close_unit <- function(handle) {
+    .Call(`_usbtc08r_close_unit`, handle)
+}
+
+#' Stop Unit
+#' @export
+stop_unit <- function(handle) {
+    .Call(`_usbtc08r_stop_unit`, handle)
+}
+
+#' Get Minimum Interval in Milliseconds
+#' @details Can answer zero.
+#' @param handle Integer handle of unit
+#' @export
+get_minimum_interval_ms <- function(handle) {
+    .Call(`_usbtc08r_get_minimum_interval_ms`, handle)
+}
+
+#' Set Channel Type
+#' @param handle Unit handle
+#' @param channel Selected channel
+#' @param tc_type Thermocouple type, one of the follow
+#'   `c("B", "E", "J", "K", "N", "R", "S", "T")`
+#'   or `"X"` for voltage, space `" "` to disable channel
+#' @export
+set_channel <- function(handle, channel, tc_type) {
+    .Call(`_usbtc08r_set_channel`, handle, channel, tc_type)
+}
+
+#' Run
+#' @details Fails if no channels set.
+#' @param interval_ms Sampling interval in milliseconds
+#' @export
+run <- function(handle, interval_ms) {
+    .Call(`_usbtc08r_run`, handle, interval_ms)
+}
+
+#' Get Temperature
+#' @details The number of readings returned may not match the length requested, or might even be zero.
+#' @export
+get_temp <- function(handle, buffer_length, channel, units, fill_missing) {
+    .Call(`_usbtc08r_get_temp`, handle, buffer_length, channel, units, fill_missing)
+}
+
+#' Get Single Temperature
+#' @details Uses `USBTC08_CHANNEL_COUNT` rather than `USBTC08_MAX_CHANNELS` because each unit has nine channels including CJC.
+#' @export
+get_single <- function(handle, units) {
+    .Call(`_usbtc08r_get_single`, handle, units)
+}
+
+#' Get Unit Information
+#' @details Makes an important assumption about the driver version: the driver
+#'   must null-terminate the character string. Also assumes that non-zero
+#'   return indicates success and never error.
+#' @param handle Integer handle of unit
+#' @export
+get_unit_info <- function(handle) {
+    .Call(`_usbtc08r_get_unit_info`, handle)
 }
 
 #' Get Last Error

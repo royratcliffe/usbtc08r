@@ -9,3 +9,6 @@ open_unit_progress()
 \description{
 Open Unit Progress
 }
+\details{
+The handle only makes sense on completion, never on pending or failure.
+}
