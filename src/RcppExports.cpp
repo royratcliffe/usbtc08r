@@ -20,6 +20,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// open_unit_async
+int open_unit_async();
+RcppExport SEXP _usbtc08r_open_unit_async() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(open_unit_async());
+    return rcpp_result_gen;
+END_RCPP
+}
+// open_unit_progress
+List open_unit_progress();
+RcppExport SEXP _usbtc08r_open_unit_progress() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(open_unit_progress());
+    return rcpp_result_gen;
+END_RCPP
+}
 // get_last_error
 int get_last_error(int handle);
 RcppExport SEXP _usbtc08r_get_last_error(SEXP handleSEXP) {
@@ -34,6 +54,8 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_usbtc08r_open_unit", (DL_FUNC) &_usbtc08r_open_unit, 0},
+    {"_usbtc08r_open_unit_async", (DL_FUNC) &_usbtc08r_open_unit_async, 0},
+    {"_usbtc08r_open_unit_progress", (DL_FUNC) &_usbtc08r_open_unit_progress, 0},
     {"_usbtc08r_get_last_error", (DL_FUNC) &_usbtc08r_get_last_error, 1},
     {NULL, NULL, 0}
 };

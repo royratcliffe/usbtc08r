@@ -7,6 +7,18 @@ open_unit <- function() {
     .Call(`_usbtc08r_open_unit`)
 }
 
+#' Open Unit Asynchronously
+#' @export
+open_unit_async <- function() {
+    .Call(`_usbtc08r_open_unit_async`)
+}
+
+#' Open Unit Progress
+#' @export
+open_unit_progress <- function() {
+    .Call(`_usbtc08r_open_unit_progress`)
+}
+
 #' Get Last Error
 #' @export
 get_last_error <- function(handle) {

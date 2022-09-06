@@ -2,5 +2,7 @@
 
 export(get_last_error)
 export(open_unit)
+export(open_unit_async)
+export(open_unit_progress)
 importFrom(Rcpp,sourceCpp)
 useDynLib(usbtc08r, .registration = TRUE)
