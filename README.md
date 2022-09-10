@@ -9,6 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/usbtc08r)](https://CRAN.R-project.org/package=usbtc08r)
+[![R-CMD-check](https://github.com/royratcliffe/usbtc08r/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/royratcliffe/usbtc08r/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of usbtc08r is to …
