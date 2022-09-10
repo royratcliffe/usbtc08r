@@ -10,23 +10,41 @@
 #' }
 #' @export
 usb_tc08_open <- function() {
-  handle <- open_unit_()
+  handle <- open_()
   if (handle < 0L) stop(error_(get_last_error_(0L)))
-  if (handle > 0L) usb_tc08_unit(handle)
+  if (handle > 0L) structure(handle, class = c("sync_tc08", "tc08"))
 }
 
-usb_tc08_unit <- function(handle) structure(handle, class = "usb_tc08_unit")
+#' Starts opening TC-08 units asynchronously
+#' @description Asynchronously opens all as-yet-unopened TC-08 units.
+#' @details The underlying driver must return 1 as success. All other return
+#'   values trigger an exception, even if not zero. Negative return values occur
+#'   if another attempt to start the asynchronous opening procedure happens.
+#'   Open only once.
+#' @export
+usb_tc08_open_async <- function()
+  if (open_async_() != 1L) stop(error_(get_last_error_(0L)))
+
+#' Progressively opens TC-08 units for asynchronous-mode operations
+#' @export
+usb_tc08_open_progress <- function() {
+  progress <- open_progress_()
+  if (progress[1L] < 0L) stop(error_(get_last_error_(0L)))
+  if (progress[2L] > 0L) structure(progress[2L], class = c("async_tc08", "tc08"))
+}
 
 #' Closes TC-08 unit
 #' @param x Open TC-08 unit.
 #' @export
-usb_tc08_close <- function(x, ...) UseMethod("close", x)
+usb_tc08_close <- function(x) UseMethod("usb_tc08_close", x)
 
-close.usb_tc08_unit <- function(x) close_unit_(x)
+#' @export
+usb_tc08_close.tc08 <- function(x) close_(x)
 
 #' Gets last error of TC-08 unit
 #' @param x Open TC-08 unit.
 #' @export
-usb_tc08_get_last_error <- function(x, ...) UseMethod("get_last_error", x)
+usb_tc08_get_last_error <- function(x) UseMethod("usb_tc08_get_last_error", x)
 
-get_last_error.usb_tc08_unit <- function(x) get_last_error_(x)
+#' @export
+usb_tc08_get_last_error.tc08 <- function(x) get_last_error_(x)
