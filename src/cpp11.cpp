@@ -6,17 +6,31 @@
 #include <R_ext/Visibility.h>
 
 // code.cpp
-int16_t open_unit_();
-extern "C" SEXP _usbtc08r_open_unit_() {
+int16_t open_();
+extern "C" SEXP _usbtc08r_open_() {
   BEGIN_CPP11
-    return cpp11::as_sexp(open_unit_());
+    return cpp11::as_sexp(open_());
   END_CPP11
 }
 // code.cpp
-int16_t close_unit_(int16_t handle);
-extern "C" SEXP _usbtc08r_close_unit_(SEXP handle) {
+int16_t open_async_();
+extern "C" SEXP _usbtc08r_open_async_() {
   BEGIN_CPP11
-    return cpp11::as_sexp(close_unit_(cpp11::as_cpp<cpp11::decay_t<int16_t>>(handle)));
+    return cpp11::as_sexp(open_async_());
+  END_CPP11
+}
+// code.cpp
+cpp11::writable::integers open_progress_();
+extern "C" SEXP _usbtc08r_open_progress_() {
+  BEGIN_CPP11
+    return cpp11::as_sexp(open_progress_());
+  END_CPP11
+}
+// code.cpp
+int16_t close_(int16_t handle);
+extern "C" SEXP _usbtc08r_close_(SEXP handle) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(close_(cpp11::as_cpp<cpp11::decay_t<int16_t>>(handle)));
   END_CPP11
 }
 // code.cpp
@@ -39,10 +53,12 @@ extern "C" {
 extern SEXP run_testthat_tests(SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_usbtc08r_close_unit_",     (DL_FUNC) &_usbtc08r_close_unit_,     1},
+    {"_usbtc08r_close_",          (DL_FUNC) &_usbtc08r_close_,          1},
     {"_usbtc08r_error_",          (DL_FUNC) &_usbtc08r_error_,          1},
     {"_usbtc08r_get_last_error_", (DL_FUNC) &_usbtc08r_get_last_error_, 1},
-    {"_usbtc08r_open_unit_",      (DL_FUNC) &_usbtc08r_open_unit_,      0},
+    {"_usbtc08r_open_",           (DL_FUNC) &_usbtc08r_open_,           0},
+    {"_usbtc08r_open_async_",     (DL_FUNC) &_usbtc08r_open_async_,     0},
+    {"_usbtc08r_open_progress_",  (DL_FUNC) &_usbtc08r_open_progress_,  0},
     {"run_testthat_tests",        (DL_FUNC) &run_testthat_tests,        1},
     {NULL, NULL, 0}
 };

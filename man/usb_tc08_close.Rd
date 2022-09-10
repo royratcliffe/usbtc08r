@@ -4,7 +4,7 @@
 \alias{usb_tc08_close}
 \title{Closes TC-08 unit}
 \usage{
-usb_tc08_close(x, ...)
+usb_tc08_close(x)
 }
 \arguments{
 \item{x}{Open TC-08 unit.}
