@@ -26,4 +26,7 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
+      - name: Install libusbtc08-dev
+        run: sudo apt-get install -y libusbtc08-dev
+
       - uses: r-lib/actions/check-r-package@v2
