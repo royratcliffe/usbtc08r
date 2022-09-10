@@ -8,10 +8,38 @@
   return usb_tc08_open_unit_async();
 }
 
-[[cpp11::register]] cpp11::writable::integers open_progress_() {
+[[cpp11::register]] cpp11::integers open_progress_() {
   int16_t handle, percent;
-  int16_t progress = usb_tc08_open_unit_progress(&handle, &percent);
-  return cpp11::writable::integers{progress, handle, percent};
+  cpp11::writable::integers x{usb_tc08_open_unit_progress(&handle, &percent)};
+  x.attr("handle") = handle;
+  x.attr("percent") = percent;
+  return x;
+}
+
+/*
+ * The length argument is the maximum length of the timed-temperature buffer,
+ * not the actual; it acts as the reserve capacity, up to but not exceeding.
+ * Ignore the sign by assuming positive lengths only, design-by-contract style.
+ */
+[[cpp11::register]] cpp11::data_frame get_temp_(int16_t handle, int32_t length, int16_t channel, int16_t units, int16_t fill) {
+  int16_t overflow;
+  auto temp_buffer = new float[length];
+  auto time_buffer = new int32_t[length];
+  auto nrow = usb_tc08_get_temp(handle, temp_buffer, time_buffer, length, &overflow, channel, units, fill);
+  using namespace cpp11;
+  writable::integers time;
+  writable::doubles temp;
+  for (size_t row = 0; row < nrow; ++row) {
+    time.push_back(time_buffer[row]);
+    temp.push_back(temp_buffer[row]);
+  }
+  delete[] temp_buffer;
+  delete[] time_buffer;
+  writable::data_frame x{
+    "time"_nm = time, "temp"_nm = temp
+  };
+  x.attr("overflow") = overflow;
+  return x;
 }
 
 [[cpp11::register]] int16_t close_(int16_t handle) {
