@@ -1,3 +1,4 @@
 PicoSDK = ${ProgramW6432}/Pico Technology/SDK
 PKG_CPPFLAGS = -I"${PicoSDK}/inc"
 PKG_LIBS = -L"${PicoSDK}/lib" -lusbtc08
+CXX_STD = CXX11
