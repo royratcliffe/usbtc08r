@@ -35,14 +35,34 @@ usb_tc08_open_progress <- function() {
 }
 
 #' Sets a channel thermocouple type
+#' @details Set up the channels \emph{before} running in asynchronous mode.
 #' @param x TC-08 unit, synchronous or asynchronous mode.
 #' @param channel Channel to set.
 #' @param tc_type Type of thermocouple. Must be an integer, not a character.
 #' @export
-usb_tc08_set_channel <- function(x, ...) UseMethod("usb_tc08_set_channel", x)
+usb_tc08_set_channel <- function(x, channel, tc_type) UseMethod("usb_tc08_set_channel", x)
 
 #' @export
 usb_tc08_set_channel.tc08 <- function(x, ...) set_channel_(x, ...)
+
+#' Runs a TC-08 asynchronously
+#' @details Only succeeds when in asynchronous mode. Fails when synchronous. Use
+#'   \code[usbtc08r]{usb_tc08_stop} to stop the run, before closing.
+#' @param x TC-08 opened for asynchronous-mode operations.
+#' @param interval Sampling interval in milliseconds between the minimum
+#'   possible level and 65535ms.
+#' @export
+usb_tc08_run <- function(x, interval) UseMethod("usb_tc08_run", x)
+
+#' @export
+usb_tc08_run.async_tc08 <- function(x, ...) run_(x, ...)
+
+#' Stops an asynchronous TC-08
+#' @export
+usb_tc08_stop <- function(x) UseMethod("usb_tc08_stop", x)
+
+#' @export
+usb_tc08_stop.async_tc08 <- function(x, ...) stop_(x, ...)
 
 #' Closes TC-08 unit
 #' @param x Open TC-08 unit.

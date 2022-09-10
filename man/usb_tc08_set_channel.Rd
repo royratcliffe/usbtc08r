@@ -4,7 +4,7 @@
 \alias{usb_tc08_set_channel}
 \title{Sets a channel thermocouple type}
 \usage{
-usb_tc08_set_channel(x, ...)
+usb_tc08_set_channel(x, channel, tc_type)
 }
 \arguments{
 \item{x}{TC-08 unit, synchronous or asynchronous mode.}
@@ -15,4 +15,7 @@ usb_tc08_set_channel(x, ...)
 }
 \description{
 Sets a channel thermocouple type
+}
+\details{
+Set up the channels \emph{before} running in asynchronous mode.
 }

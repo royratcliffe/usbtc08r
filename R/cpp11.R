@@ -20,6 +20,10 @@ run_ <- function(handle, interval) {
   .Call(`_usbtc08r_run_`, handle, interval)
 }
 
+stop_ <- function(handle) {
+  .Call(`_usbtc08r_stop_`, handle)
+}
+
 get_temp_ <- function(handle, length, channel, units, fill) {
   .Call(`_usbtc08r_get_temp_`, handle, length, channel, units, fill)
 }

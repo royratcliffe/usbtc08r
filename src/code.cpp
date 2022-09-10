@@ -28,6 +28,10 @@
   return usb_tc08_run(handle, interval);
 }
 
+[[cpp11::register]] int16_t stop_(int16_t handle) {
+  return usb_tc08_stop(handle);
+}
+
 /*
  * The length argument is the maximum length of the timed-temperature buffers,
  * not the actual; it acts as the reserve capacity, up to but not exceeding it.
