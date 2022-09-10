@@ -34,6 +34,16 @@ usb_tc08_open_progress <- function() {
   if (handle > 0L) structure(handle, class = c("async_tc08", "tc08"))
 }
 
+#' Sets a channel thermocouple type
+#' @param x TC-08 unit, synchronous or asynchronous mode.
+#' @param channel Channel to set.
+#' @param tc_type Type of thermocouple. Must be an integer, not a character.
+#' @export
+usb_tc08_set_channel <- function(x, ...) UseMethod("usb_tc08_set_channel", x)
+
+#' @export
+usb_tc08_set_channel.tc08 <- function(x, ...) set_channel_(x, ...)
+
 #' Closes TC-08 unit
 #' @param x Open TC-08 unit.
 #' @export

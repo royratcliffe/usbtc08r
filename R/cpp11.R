@@ -12,6 +12,14 @@ open_progress_ <- function() {
   .Call(`_usbtc08r_open_progress_`)
 }
 
+set_channel_ <- function(handle, channel, tc_type) {
+  .Call(`_usbtc08r_set_channel_`, handle, channel, tc_type)
+}
+
+run_ <- function(handle, interval) {
+  .Call(`_usbtc08r_run_`, handle, interval)
+}
+
 get_temp_ <- function(handle, length, channel, units, fill) {
   .Call(`_usbtc08r_get_temp_`, handle, length, channel, units, fill)
 }

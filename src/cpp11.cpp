@@ -27,6 +27,20 @@ extern "C" SEXP _usbtc08r_open_progress_() {
   END_CPP11
 }
 // code.cpp
+int16_t set_channel_(int16_t handle, int16_t channel, int8_t tc_type);
+extern "C" SEXP _usbtc08r_set_channel_(SEXP handle, SEXP channel, SEXP tc_type) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(set_channel_(cpp11::as_cpp<cpp11::decay_t<int16_t>>(handle), cpp11::as_cpp<cpp11::decay_t<int16_t>>(channel), cpp11::as_cpp<cpp11::decay_t<int8_t>>(tc_type)));
+  END_CPP11
+}
+// code.cpp
+int32_t run_(int16_t handle, int32_t interval);
+extern "C" SEXP _usbtc08r_run_(SEXP handle, SEXP interval) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(run_(cpp11::as_cpp<cpp11::decay_t<int16_t>>(handle), cpp11::as_cpp<cpp11::decay_t<int32_t>>(interval)));
+  END_CPP11
+}
+// code.cpp
 cpp11::data_frame get_temp_(int16_t handle, int32_t length, int16_t channel, int16_t units, int16_t fill);
 extern "C" SEXP _usbtc08r_get_temp_(SEXP handle, SEXP length, SEXP channel, SEXP units, SEXP fill) {
   BEGIN_CPP11
@@ -75,6 +89,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_usbtc08r_open_",            (DL_FUNC) &_usbtc08r_open_,            0},
     {"_usbtc08r_open_async_",      (DL_FUNC) &_usbtc08r_open_async_,      0},
     {"_usbtc08r_open_progress_",   (DL_FUNC) &_usbtc08r_open_progress_,   0},
+    {"_usbtc08r_run_",             (DL_FUNC) &_usbtc08r_run_,             2},
+    {"_usbtc08r_set_channel_",     (DL_FUNC) &_usbtc08r_set_channel_,     3},
     {"run_testthat_tests",         (DL_FUNC) &run_testthat_tests,         1},
     {NULL, NULL, 0}
 };

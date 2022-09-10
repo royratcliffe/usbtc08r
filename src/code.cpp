@@ -16,10 +16,27 @@
   return x;
 }
 
+[[cpp11::register]] int16_t set_channel_(int16_t handle, int16_t channel, int8_t tc_type) {
+  return usb_tc08_set_channel(handle, channel, tc_type);
+}
+
 /*
- * The length argument is the maximum length of the timed-temperature buffer,
- * not the actual; it acts as the reserve capacity, up to but not exceeding.
+ * Yes, the return value has a 32-bit width even though it only carries a
+ * Boolean type status code: 1 for success, 0 for failure.
+ */
+[[cpp11::register]] int32_t run_(int16_t handle, int32_t interval) {
+  return usb_tc08_run(handle, interval);
+}
+
+/*
+ * The length argument is the maximum length of the timed-temperature buffers,
+ * not the actual; it acts as the reserve capacity, up to but not exceeding it.
  * Ignore the sign by assuming positive lengths only, design-by-contract style.
+ *
+ * The order of the resulting data frame does not matter too much. Still, order
+ * time in milliseconds within the first column and then the temperature as the
+ * second data-frame column. This ordering follows a horizontal by vertical
+ * orientation for when plotting.
  */
 static cpp11::data_frame get_temp(int32_t (*get_temp)(int16_t, float *, int32_t *, int32_t, int16_t *, int16_t, int16_t, int16_t),
                                   int16_t handle, int32_t length, int16_t channel, int16_t units, int16_t fill) {
