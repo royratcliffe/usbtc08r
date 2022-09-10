@@ -21,15 +21,16 @@
  * not the actual; it acts as the reserve capacity, up to but not exceeding.
  * Ignore the sign by assuming positive lengths only, design-by-contract style.
  */
-[[cpp11::register]] cpp11::data_frame get_temp_(int16_t handle, int32_t length, int16_t channel, int16_t units, int16_t fill) {
+static cpp11::data_frame get_temp(int32_t (*get_temp)(int16_t, float *, int32_t *, int32_t, int16_t *, int16_t, int16_t, int16_t),
+                                  int16_t handle, int32_t length, int16_t channel, int16_t units, int16_t fill) {
   int16_t overflow;
   auto temp_buffer = new float[length];
   auto time_buffer = new int32_t[length];
-  auto nrow = usb_tc08_get_temp(handle, temp_buffer, time_buffer, length, &overflow, channel, units, fill);
+  auto nrow = get_temp(handle, temp_buffer, time_buffer, length, &overflow, channel, units, fill);
   using namespace cpp11;
   writable::integers time;
   writable::doubles temp;
-  for (size_t row = 0; row < nrow; ++row) {
+  for (auto row = 0; row < nrow; ++row) {
     time.push_back(time_buffer[row]);
     temp.push_back(temp_buffer[row]);
   }
@@ -40,6 +41,14 @@
   };
   x.attr("overflow") = overflow;
   return x;
+}
+
+[[cpp11::register]] cpp11::data_frame get_temp_(int16_t handle, int32_t length, int16_t channel, int16_t units, int16_t fill) {
+  return get_temp(usb_tc08_get_temp, handle, length, channel, units, fill);
+}
+
+[[cpp11::register]] cpp11::data_frame get_temp_deskew_(int16_t handle, int32_t length, int16_t channel, int16_t units, int16_t fill) {
+  return get_temp(usb_tc08_get_temp_deskew, handle, length, channel, units, fill);
 }
 
 [[cpp11::register]] int16_t close_(int16_t handle) {
