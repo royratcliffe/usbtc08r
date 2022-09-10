@@ -17,5 +17,5 @@ Runs a TC-08 asynchronously
 }
 \details{
 Only succeeds when in asynchronous mode. Fails when synchronous. Use
-\code[usbtc08r]{usb_tc08_stop} to stop the run, before closing.
+\code{\link[usbtc08r]{usb_tc08_stop}} to stop the run, before closing.
 }

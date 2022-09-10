@@ -47,7 +47,7 @@ usb_tc08_set_channel.tc08 <- function(x, ...) set_channel_(x, ...)
 
 #' Runs a TC-08 asynchronously
 #' @details Only succeeds when in asynchronous mode. Fails when synchronous. Use
-#'   \code[usbtc08r]{usb_tc08_stop} to stop the run, before closing.
+#'   \code{\link[usbtc08r]{usb_tc08_stop}} to stop the run, before closing.
 #' @param x TC-08 opened for asynchronous-mode operations.
 #' @param interval Sampling interval in milliseconds between the minimum
 #'   possible level and 65535ms.
@@ -58,6 +58,7 @@ usb_tc08_run <- function(x, interval) UseMethod("usb_tc08_run", x)
 usb_tc08_run.async_tc08 <- function(x, ...) run_(x, ...)
 
 #' Stops an asynchronous TC-08
+#' @param x Opened and running TC-08 in asynchronous mode.
 #' @export
 usb_tc08_stop <- function(x) UseMethod("usb_tc08_stop", x)
 
