@@ -42,7 +42,8 @@
  * second data-frame column. This ordering follows a horizontal by vertical
  * orientation for when plotting.
  */
-static cpp11::data_frame get_temp(int32_t (*get_temp)(int16_t, float *, int32_t *, int32_t, int16_t *, int16_t, int16_t, int16_t),
+template<typename T>
+static cpp11::data_frame get_temp(T (*get_temp)(int16_t, float *, T *, int32_t, int16_t *, int16_t, int16_t, int16_t),
                                   int16_t handle, int32_t length, int16_t channel, int16_t units, int16_t fill) {
   int16_t overflow;
   auto temp_buffer = new float[length];
