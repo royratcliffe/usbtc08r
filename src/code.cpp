@@ -123,7 +123,7 @@ static cpp11::data_frame get_temp(T (*get_temp)(int16_t, float *, T *, T, int16_
   int16_t overflow;
   float temp_buffer[9];
   cpp11::writable::logicals x{usb_tc08_get_single(handle, temp_buffer, &overflow, units_(units))};
-  if (cpp11::r_bool(x[0])) cpp11::stop(error_(usb_tc08_get_last_error(handle)));
+  if (!cpp11::r_bool(x[0])) cpp11::stop(error_(usb_tc08_get_last_error(handle)));
   x.attr("temp") = cpp11::writable::doubles(temp_buffer, temp_buffer + sizeof(temp_buffer)/sizeof(temp_buffer[0]));
   x.attr("overflow") = overflow;
   return x;
