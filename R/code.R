@@ -66,7 +66,7 @@ usb_tc08_stop <- function(x) UseMethod("usb_tc08_stop", x)
 usb_tc08_stop.async_tc08 <- function(x, ...) stop_(x, ...)
 
 #' @export
-usb_tc08_get_single <- function(x) UseMethod("usb_tc08_get_single", x)
+usb_tc08_get_single <- function(x, ...) UseMethod("usb_tc08_get_single", x)
 
 #' @export
 usb_tc08_get_single.sync_tc08 <- function(x, ...) get_single_(x, ...)
