@@ -87,6 +87,15 @@ static cpp11::data_frame get_temp(T (*get_temp)(int16_t, float *, T *, T, int16_
   return get_temp(usb_tc08_get_temp_deskew, handle, length, channel, units, fill);
 }
 
+[[cpp11::register]] cpp11::logicals get_single_(int16_t handle, int16_t units) {
+  int16_t overflow;
+  float temp_buffer[9];
+  cpp11::writable::logicals x{usb_tc08_get_single(handle, temp_buffer, &overflow, units)};
+  x.attr("temp") = cpp11::writable::doubles(temp_buffer, temp_buffer + sizeof(temp_buffer)/sizeof(temp_buffer[0]));
+  x.attr("overflow") = overflow;
+  return x;
+}
+
 [[cpp11::register]] int16_t close_(int16_t handle) {
   return usb_tc08_close_unit(handle);
 }

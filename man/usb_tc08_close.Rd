@@ -7,8 +7,11 @@
 usb_tc08_close(x)
 }
 \arguments{
-\item{x}{Open TC-08 unit.}
+\item{x}{Previously opened TC-08 unit.}
 }
 \description{
 Closes TC-08 unit
+}
+\details{
+Once closed externally, the handle becomes invalid.
 }

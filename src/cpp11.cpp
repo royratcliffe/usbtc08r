@@ -62,6 +62,13 @@ extern "C" SEXP _usbtc08r_get_temp_deskew_(SEXP handle, SEXP length, SEXP channe
   END_CPP11
 }
 // code.cpp
+cpp11::logicals get_single_(int16_t handle, int16_t units);
+extern "C" SEXP _usbtc08r_get_single_(SEXP handle, SEXP units) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(get_single_(cpp11::as_cpp<cpp11::decay_t<int16_t>>(handle), cpp11::as_cpp<cpp11::decay_t<int16_t>>(units)));
+  END_CPP11
+}
+// code.cpp
 int16_t close_(int16_t handle);
 extern "C" SEXP _usbtc08r_close_(SEXP handle) {
   BEGIN_CPP11
@@ -91,6 +98,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_usbtc08r_close_",           (DL_FUNC) &_usbtc08r_close_,           1},
     {"_usbtc08r_error_",           (DL_FUNC) &_usbtc08r_error_,           1},
     {"_usbtc08r_get_last_error_",  (DL_FUNC) &_usbtc08r_get_last_error_,  1},
+    {"_usbtc08r_get_single_",      (DL_FUNC) &_usbtc08r_get_single_,      2},
     {"_usbtc08r_get_temp_",        (DL_FUNC) &_usbtc08r_get_temp_,        5},
     {"_usbtc08r_get_temp_deskew_", (DL_FUNC) &_usbtc08r_get_temp_deskew_, 5},
     {"_usbtc08r_open_",            (DL_FUNC) &_usbtc08r_open_,            0},

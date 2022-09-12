@@ -32,6 +32,10 @@ get_temp_deskew_ <- function(handle, length, channel, units, fill) {
   .Call(`_usbtc08r_get_temp_deskew_`, handle, length, channel, units, fill)
 }
 
+get_single_ <- function(handle, units) {
+  .Call(`_usbtc08r_get_single_`, handle, units)
+}
+
 close_ <- function(handle) {
   .Call(`_usbtc08r_close_`, handle)
 }

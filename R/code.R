@@ -65,9 +65,17 @@ usb_tc08_stop <- function(x) UseMethod("usb_tc08_stop", x)
 #' @export
 usb_tc08_stop.async_tc08 <- function(x, ...) stop_(x, ...)
 
+#' @export
+usb_tc08_get_single <- function(x) UseMethod("usb_tc08_get_single", x)
+
+#' @export
+usb_tc08_get_single.sync_tc08 <- function(x, ...) {
+  x <- get_single_(x, ...)
+}
+
 #' Closes TC-08 unit
 #' @param x Previously opened TC-08 unit.
-#' @details Once closed, the handle becomes invalid.
+#' @details Once closed externally, the handle becomes invalid.
 #' @export
 usb_tc08_close <- function(x) UseMethod("usb_tc08_close", x)
 

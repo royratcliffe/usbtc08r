@@ -2,11 +2,13 @@
 
 S3method(usb_tc08_close,tc08)
 S3method(usb_tc08_get_last_error,tc08)
+S3method(usb_tc08_get_single,sync_tc08)
 S3method(usb_tc08_run,async_tc08)
 S3method(usb_tc08_set_channel,tc08)
 S3method(usb_tc08_stop,async_tc08)
 export(usb_tc08_close)
 export(usb_tc08_get_last_error)
+export(usb_tc08_get_single)
 export(usb_tc08_open)
 export(usb_tc08_open_async)
 export(usb_tc08_open_progress)
