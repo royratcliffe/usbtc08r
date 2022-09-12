@@ -1,5 +1,7 @@
 #' Opens TC-08 unit for synchronous-mode operations
-#' @description Opens the next available closed TC-08 unit.
+#' @description Opens the next available closed TC-08 unit. Opens synchronously
+#'   and therefore blocks the caller until a USB-connected TC-08 has been found
+#'   and opened; a process that might take a second or two.
 #' @details Asks for the last error using a zero unit handle if opening fails.
 #'   Handles only represent open units so no handle exists for closed units.
 #' @return Handle of opened TC-08 unit or \code{NULL} if no more closed units
@@ -65,8 +67,19 @@ usb_tc08_stop <- function(x) UseMethod("usb_tc08_stop", x)
 #' @export
 usb_tc08_stop.async_tc08 <- function(x, ...) stop_(x, ...)
 
+#' Synchronously samples all enabled channels
+#' @param x Opened synchronous-mode TC-08 unit.
+#' @param units Units for resulting temperatures.
+#' @return Logically \code{TRUE} on success. The logical vector has two
+#'   additional attributes.
+#'   \describe{
+#'     \item{\code{temp}}{Temperatures, nine in total, one for each channel plus
+#'       the CJC or Cold-Junction Compensation.}
+#'     \item{\code{overflow}}{Overflow flags, an integer carrying a nine-bit
+#'       mask encoding channel overflow flags.}
+#'   }
 #' @export
-usb_tc08_get_single <- function(x, ...) UseMethod("usb_tc08_get_single", x)
+usb_tc08_get_single <- function(x, units) UseMethod("usb_tc08_get_single", x)
 
 #' @export
 usb_tc08_get_single.sync_tc08 <- function(x, ...) get_single_(x, ...)
