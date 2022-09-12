@@ -1,5 +1,26 @@
 #include "code.h"
 
+#include <map>
+
+static int16_t units_(std::string x) {
+  static const std::map<std::string, int16_t> units{
+    {"centigrade", USBTC08_UNITS_CENTIGRADE},
+    {"fahrenheit", USBTC08_UNITS_FAHRENHEIT},
+    {"kelvin", USBTC08_UNITS_KELVIN},
+    {"rankine", USBTC08_UNITS_RANKINE}
+  };
+  auto i = units.find(x);
+  if (i == units.end()) cpp11::stop("invalid `units`");
+  return i->second;
+}
+
+[[cpp11::register]] std::string error_(int16_t error) {
+  switch (error) {
+  case USBTC08_ERROR_OK: return "ok";
+  }
+  return std::to_string(error);
+}
+
 [[cpp11::register]] int16_t open_() {
   return usb_tc08_open_unit();
 }
@@ -16,7 +37,13 @@
   return x;
 }
 
-[[cpp11::register]] int16_t set_channel_(int16_t handle, int16_t channel, int8_t tc_type) {
+/*
+ * Uses type `char` rather than `int8_t` because `cpp11` with therefore perform
+ * a character vector transformation automatically; no need for an enumeration
+ * look up, especially so since the Windows header does **not** define the
+ * thermocouple types.
+ */
+[[cpp11::register]] int16_t set_channel_(int16_t handle, int16_t channel, char tc_type) {
   return usb_tc08_set_channel(handle, channel, tc_type);
 }
 
@@ -58,11 +85,11 @@
  */
 template<typename T>
 static cpp11::data_frame get_temp(T (*get_temp)(int16_t, float *, T *, T, int16_t *, int16_t, int16_t, int16_t),
-                                  int16_t handle, int32_t length, int16_t channel, int16_t units, int16_t fill) {
+                                  int16_t handle, int32_t length, int16_t channel, std::string units, bool fill) {
   int16_t overflow;
   auto temp_buffer = new float[length];
   auto time_buffer = new T[length];
-  auto nrow = get_temp(handle, temp_buffer, time_buffer, length, &overflow, channel, units, fill);
+  auto nrow = get_temp(handle, temp_buffer, time_buffer, length, &overflow, channel, units_(units), fill);
   using namespace cpp11;
   writable::integers time;
   writable::doubles temp;
@@ -75,22 +102,28 @@ static cpp11::data_frame get_temp(T (*get_temp)(int16_t, float *, T *, T, int16_
   writable::data_frame x{
     "time"_nm = time, "temp"_nm = temp
   };
-  x.attr("overflow") = overflow;
+  x.attr("overflow") = cpp11::writable::logicals{overflow};
   return x;
 }
 
-[[cpp11::register]] cpp11::data_frame get_temp_(int16_t handle, int32_t length, int16_t channel, int16_t units, int16_t fill) {
+[[cpp11::register]] cpp11::data_frame get_temp_(int16_t handle, int32_t length, int16_t channel, std::string units, bool fill) {
   return get_temp(usb_tc08_get_temp, handle, length, channel, units, fill);
 }
 
-[[cpp11::register]] cpp11::data_frame get_temp_deskew_(int16_t handle, int32_t length, int16_t channel, int16_t units, int16_t fill) {
+[[cpp11::register]] cpp11::data_frame get_temp_deskew_(int16_t handle, int32_t length, int16_t channel, std::string units, bool fill) {
   return get_temp(usb_tc08_get_temp_deskew, handle, length, channel, units, fill);
 }
 
-[[cpp11::register]] cpp11::logicals get_single_(int16_t handle, int16_t units) {
+/*
+ * Converts the result to a logical vector, single scalar element, describing
+ * success or failure. Any non-zero value becomes `TRUE` in R, only zero returns
+ * `FALSE` for failure.
+ */
+[[cpp11::register]] cpp11::logicals get_single_(int16_t handle, std::string units) {
   int16_t overflow;
   float temp_buffer[9];
-  cpp11::writable::logicals x{usb_tc08_get_single(handle, temp_buffer, &overflow, units)};
+  cpp11::writable::logicals x{usb_tc08_get_single(handle, temp_buffer, &overflow, units_(units))};
+  if (cpp11::r_bool(x[0])) cpp11::stop(error_(usb_tc08_get_last_error(handle)));
   x.attr("temp") = cpp11::writable::doubles(temp_buffer, temp_buffer + sizeof(temp_buffer)/sizeof(temp_buffer[0]));
   x.attr("overflow") = overflow;
   return x;
@@ -102,11 +135,4 @@ static cpp11::data_frame get_temp(T (*get_temp)(int16_t, float *, T *, T, int16_
 
 [[cpp11::register]] int16_t get_last_error_(int16_t handle) {
   return usb_tc08_get_last_error(handle);
-}
-
-[[cpp11::register]] std::string error_(int16_t error) {
-  switch (error) {
-  case USBTC08_ERROR_OK: return "ok";
-  }
-  return std::to_string(error);
 }
