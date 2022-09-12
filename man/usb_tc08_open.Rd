@@ -11,7 +11,9 @@ Handle of opened TC-08 unit or \code{NULL} if no more closed units
 available for opening.
 }
 \description{
-Opens the next available closed TC-08 unit.
+Opens the next available closed TC-08 unit. Opens synchronously
+and therefore blocks the caller until a USB-connected TC-08 has been found
+and opened; a process that might take a second or two.
 }
 \details{
 Asks for the last error using a zero unit handle if opening fails.
