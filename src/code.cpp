@@ -41,13 +41,27 @@
  * time in milliseconds within the first column and then the temperature as the
  * second data-frame column. This ordering follows a horizontal by vertical
  * orientation for when plotting.
+ *
+ * The functional template becomes necessary because the interface headers by
+ * Rico Technologies introduce important differences between Linux and Windows.
+ * Buffer length and millisecond times have type `int32_t` on Windows but have
+ * type `long` on Linux. On 64-bit platforms however, long integers are 64 bits
+ * wide. Note the following results compiled indirectly via R's `cpp11` on
+ * 64-bit Linux using the standard toolchain.
+ *
+ *  > cpp11::cpp_eval("sizeof(int16_t)")
+ *  [1] 2
+ *  > cpp11::cpp_eval("sizeof(int32_t)")
+ *  [1] 4
+ *  > cpp11::cpp_eval("sizeof(long)")
+ *  [1] 8
  */
 template<typename T>
-static cpp11::data_frame get_temp(T (*get_temp)(int16_t, float *, T *, int32_t, int16_t *, int16_t, int16_t, int16_t),
+static cpp11::data_frame get_temp(T (*get_temp)(int16_t, float *, T *, T, int16_t *, int16_t, int16_t, int16_t),
                                   int16_t handle, int32_t length, int16_t channel, int16_t units, int16_t fill) {
   int16_t overflow;
   auto temp_buffer = new float[length];
-  auto time_buffer = new int32_t[length];
+  auto time_buffer = new T[length];
   auto nrow = get_temp(handle, temp_buffer, time_buffer, length, &overflow, channel, units, fill);
   using namespace cpp11;
   writable::integers time;
