@@ -69,9 +69,7 @@ usb_tc08_stop.async_tc08 <- function(x, ...) stop_(x, ...)
 usb_tc08_get_single <- function(x) UseMethod("usb_tc08_get_single", x)
 
 #' @export
-usb_tc08_get_single.sync_tc08 <- function(x, ...) {
-  x <- get_single_(x, ...)
-}
+usb_tc08_get_single.sync_tc08 <- function(x, ...) get_single_(x, ...)
 
 #' Closes TC-08 unit
 #' @param x Previously opened TC-08 unit.
