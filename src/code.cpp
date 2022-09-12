@@ -10,7 +10,7 @@ static int16_t units_(std::string x) {
     {"rankine", USBTC08_UNITS_RANKINE}
   };
   auto i = units.find(x);
-  if (i == units.end()) cpp11::stop("invalid `units`");
+  if (i == units.end()) cpp11::stop("invalid string `%s` value for units", x.c_str());
   return i->second;
 }
 
@@ -19,6 +19,15 @@ static int16_t units_(std::string x) {
   case USBTC08_ERROR_OK: return "ok";
   }
   return std::to_string(error);
+}
+
+/*
+ * Some interface functions answer negative integer values for logical success
+ * or failure results.
+ */
+static bool logical_(int x) {
+  if (x < 0) cpp11::stop("invalid integer `%d` value for logical", x);
+  return x > 0;
 }
 
 [[cpp11::register]] int16_t open_() {
@@ -122,7 +131,7 @@ static cpp11::data_frame get_temp(T (*get_temp)(int16_t, float *, T *, T, int16_
 [[cpp11::register]] cpp11::logicals get_single_(int16_t handle, std::string units) {
   int16_t overflow;
   float temp_buffer[9];
-  cpp11::writable::logicals x{usb_tc08_get_single(handle, temp_buffer, &overflow, units_(units))};
+  cpp11::writable::logicals x{logical_(usb_tc08_get_single(handle, temp_buffer, &overflow, units_(units)))};
   if (!cpp11::r_bool(x[0])) cpp11::stop(error_(usb_tc08_get_last_error(handle)));
   x.attr("temp") = cpp11::writable::doubles(temp_buffer, temp_buffer + sizeof(temp_buffer)/sizeof(temp_buffer[0]));
   x.attr("overflow") = overflow;
