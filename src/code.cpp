@@ -52,8 +52,8 @@ static bool logical_(int x) {
  * look up, especially so since the Windows header does **not** define the
  * thermocouple types.
  */
-[[cpp11::register]] int16_t set_channel_(int16_t handle, int16_t channel, char tc_type) {
-  return usb_tc08_set_channel(handle, channel, tc_type);
+[[cpp11::register]] bool set_channel_(int16_t handle, int16_t channel, char tc_type) {
+  return logical_(usb_tc08_set_channel(handle, channel, tc_type));
 }
 
 /*

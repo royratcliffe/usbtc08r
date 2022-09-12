@@ -34,7 +34,7 @@ extern "C" SEXP _usbtc08r_open_progress_() {
   END_CPP11
 }
 // code.cpp
-int16_t set_channel_(int16_t handle, int16_t channel, char tc_type);
+bool set_channel_(int16_t handle, int16_t channel, char tc_type);
 extern "C" SEXP _usbtc08r_set_channel_(SEXP handle, SEXP channel, SEXP tc_type) {
   BEGIN_CPP11
     return cpp11::as_sexp(set_channel_(cpp11::as_cpp<cpp11::decay_t<int16_t>>(handle), cpp11::as_cpp<cpp11::decay_t<int16_t>>(channel), cpp11::as_cpp<cpp11::decay_t<char>>(tc_type)));
