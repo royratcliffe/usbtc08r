@@ -41,6 +41,9 @@ usb_tc08_open_progress <- function() {
 #' @param x TC-08 unit, synchronous or asynchronous mode.
 #' @param channel Channel to set.
 #' @param tc_type Type of thermocouple. Must be a character, not an integer.
+#'   Valid types include: B, E, J, K, N, R, S, T, X or space for channels 1
+#'   through 8; where X measures voltage in mV with no cold-junction
+#'   compensation, space disables a channel.
 #' @export
 usb_tc08_set_channel <- function(x, channel, tc_type) UseMethod("usb_tc08_set_channel", x)
 

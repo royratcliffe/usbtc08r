@@ -14,6 +14,9 @@ static int16_t units_(std::string x) {
   return i->second;
 }
 
+/*
+ * Note the typing mistake `USBTC08_EROOR_PICOPP_TOO_OLD` for an error code.
+ */
 [[cpp11::register]] std::string error_(int16_t x) {
   static const std::map<int16_t, std::string> error{
     {USBTC08_ERROR_OK, "ok"},
