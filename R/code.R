@@ -25,6 +25,11 @@ usb_tc08_open <- function() {
 #'   if another attempt to start the asynchronous opening procedure happens.
 #'   Open only once.
 #' @export
+#' @examples
+#' \dontrun{
+#' library(usbtc08r)
+#' usb_tc08_open_async()
+#' }
 usb_tc08_open_async <- function()
   if (!open_async_()) stop(error_(get_last_error_(0L)))
 
