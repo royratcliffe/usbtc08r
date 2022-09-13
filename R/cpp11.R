@@ -4,6 +4,10 @@ units_ <- function(x) {
   .Call(`_usbtc08r_units_`, x)
 }
 
+progress_ <- function(x) {
+  .Call(`_usbtc08r_progress_`, x)
+}
+
 error_ <- function(x) {
   .Call(`_usbtc08r_error_`, x)
 }

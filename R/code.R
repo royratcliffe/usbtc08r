@@ -31,9 +31,10 @@ usb_tc08_open_async <- function()
 #' @export
 usb_tc08_open_progress <- function() {
   progress <- open_progress_()
-  if (progress < 0L) stop(error_(get_last_error_(0L)))
+  if (progress == "fail") stop(error_(get_last_error_(0L)))
   handle <- attr(progress, "handle")
   if (handle > 0L) structure(handle, class = c("async_tc08", "tc08"))
+  progress
 }
 
 #' Sets a channel thermocouple type

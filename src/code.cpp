@@ -14,6 +14,17 @@
   return i->second;
 }
 
+[[cpp11::register]] std::string progress_(int16_t x) {
+  static const std::map<int16_t, std::string> progress{
+    {USBTC08_PROGRESS_FAIL, "fail"},
+    {USBTC08_PROGRESS_PENDING, "pending"},
+    {USBTC08_PROGRESS_COMPLETE, "complete"},
+  };
+  auto i = progress.find(x);
+  if (i == progress.end()) cpp11::stop("invalid integer `%d` value for progress", x);
+  return i->second;
+}
+
 /*
  * Note the typing mistake `USBTC08_EROOR_PICOPP_TOO_OLD` for an error code.
  */
@@ -69,9 +80,9 @@
  *
  * Or, a result of 1, handle of 1 and 100 percent progress.
  */
-[[cpp11::register]] cpp11::integers open_progress_() {
+[[cpp11::register]] cpp11::strings open_progress_() {
   int16_t handle, percent;
-  cpp11::writable::integers x{usb_tc08_open_unit_progress(&handle, &percent)};
+  cpp11::writable::strings x{progress_(usb_tc08_open_unit_progress(&handle, &percent))};
   x.attr("handle") = handle;
   x.attr("percent") = percent;
   return x;
