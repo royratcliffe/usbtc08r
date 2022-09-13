@@ -52,6 +52,7 @@ usb_tc08_open_progress <- function() {
 #' @details Runs aggressively with \emph{no} delay between pending progress
 #'   results.
 #' @return List of TC-08 units opened and ready for set up and running.
+#' @export
 usb_tc08_open_async_complete <- function() {
   tc08 <- list()
   repeat {
