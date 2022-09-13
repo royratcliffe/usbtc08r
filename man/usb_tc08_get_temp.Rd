@@ -2,7 +2,7 @@
 % Please edit documentation in R/code.R
 \name{usb_tc08_get_temp}
 \alias{usb_tc08_get_temp}
-\title{Get temperatures asynchronously}
+\title{Get temperatures asynchronously.}
 \usage{
 usb_tc08_get_temp(x)
 }
@@ -10,5 +10,5 @@ usb_tc08_get_temp(x)
 \item{x}{Opened and running TC-08 in asynchronous mode.}
 }
 \description{
-Get temperatures asynchronously
+Get temperatures asynchronously.
 }

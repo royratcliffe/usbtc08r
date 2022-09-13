@@ -2,10 +2,15 @@
 % Please edit documentation in R/code.R
 \name{usb_tc08_open_progress}
 \alias{usb_tc08_open_progress}
-\title{Progressively opens TC-08 units for asynchronous-mode operations}
+\title{Progressively opens TC-08 units for asynchronous-mode operations.}
 \usage{
 usb_tc08_open_progress()
 }
+\value{
+Progress string, one of: pending or complete. Does \emph{not} return
+\code{"fail"} but raises an exception on failure by asking for the last
+error and decoding it for the exception message.
+}
 \description{
-Progressively opens TC-08 units for asynchronous-mode operations
+Progressively opens TC-08 units for asynchronous-mode operations.
 }

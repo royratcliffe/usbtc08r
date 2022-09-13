@@ -2,7 +2,7 @@
 % Please edit documentation in R/code.R
 \name{usb_tc08_get_last_error}
 \alias{usb_tc08_get_last_error}
-\title{Gets last error of TC-08 unit}
+\title{Gets last error of TC-08 unit.}
 \usage{
 usb_tc08_get_last_error(x)
 }
@@ -10,5 +10,5 @@ usb_tc08_get_last_error(x)
 \item{x}{Open TC-08 unit.}
 }
 \description{
-Gets last error of TC-08 unit
+Gets last error of TC-08 unit.
 }

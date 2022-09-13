@@ -2,7 +2,7 @@
 % Please edit documentation in R/code.R
 \name{usb_tc08_open}
 \alias{usb_tc08_open}
-\title{Opens TC-08 unit for synchronous-mode operations}
+\title{Opens TC-08 unit for synchronous-mode operations.}
 \usage{
 usb_tc08_open()
 }

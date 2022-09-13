@@ -2,7 +2,7 @@
 % Please edit documentation in R/code.R
 \name{usb_tc08_get_single}
 \alias{usb_tc08_get_single}
-\title{Synchronously samples all enabled channels}
+\title{Synchronously samples all enabled channels.}
 \usage{
 usb_tc08_get_single(x, units)
 }
@@ -22,5 +22,5 @@ mask encoding channel overflow flags.}
 }
 }
 \description{
-Synchronously samples all enabled channels
+Synchronously samples all enabled channels.
 }

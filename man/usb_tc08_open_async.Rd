@@ -2,7 +2,7 @@
 % Please edit documentation in R/code.R
 \name{usb_tc08_open_async}
 \alias{usb_tc08_open_async}
-\title{Starts opening TC-08 units asynchronously}
+\title{Starts opening TC-08 units asynchronously.}
 \usage{
 usb_tc08_open_async()
 }
@@ -17,7 +17,7 @@ if another attempt to start the asynchronous opening procedure happens.
 Open only once.
 }
 \examples{
-\dontrun{
+\donttest{
 library(usbtc08r)
 usb_tc08_open_async()
 }

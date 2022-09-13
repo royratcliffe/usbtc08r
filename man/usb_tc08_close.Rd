@@ -2,7 +2,7 @@
 % Please edit documentation in R/code.R
 \name{usb_tc08_close}
 \alias{usb_tc08_close}
-\title{Closes TC-08 unit}
+\title{Closes TC-08 unit.}
 \usage{
 usb_tc08_close(x)
 }
@@ -10,7 +10,7 @@ usb_tc08_close(x)
 \item{x}{Previously opened TC-08 unit.}
 }
 \description{
-Closes TC-08 unit
+Closes TC-08 unit.
 }
 \details{
 Once closed externally, the handle becomes invalid.

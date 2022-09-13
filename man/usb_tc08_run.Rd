@@ -2,7 +2,7 @@
 % Please edit documentation in R/code.R
 \name{usb_tc08_run}
 \alias{usb_tc08_run}
-\title{Runs a TC-08 asynchronously}
+\title{Runs a TC-08 asynchronously.}
 \usage{
 usb_tc08_run(x, interval)
 }
@@ -13,7 +13,7 @@ usb_tc08_run(x, interval)
 possible level and 65535ms.}
 }
 \description{
-Runs a TC-08 asynchronously
+Runs a TC-08 asynchronously.
 }
 \details{
 Only succeeds when in asynchronous mode. Fails when synchronous. Use

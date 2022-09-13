@@ -2,7 +2,7 @@
 % Please edit documentation in R/code.R
 \name{usb_tc08_get_temp_deskew}
 \alias{usb_tc08_get_temp_deskew}
-\title{Get asynchronously-captured de-skewed temperatures}
+\title{Get asynchronously-captured de-skewed temperatures.}
 \usage{
 usb_tc08_get_temp_deskew(x)
 }
@@ -10,5 +10,5 @@ usb_tc08_get_temp_deskew(x)
 \item{x}{Opened and running TC-08 in asynchronous mode.}
 }
 \description{
-Get asynchronously-captured de-skewed temperatures
+Get asynchronously-captured de-skewed temperatures.
 }

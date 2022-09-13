@@ -2,7 +2,7 @@
 % Please edit documentation in R/code.R
 \name{usb_tc08_set_channel}
 \alias{usb_tc08_set_channel}
-\title{Sets a channel thermocouple type}
+\title{Sets a channel thermocouple type.}
 \usage{
 usb_tc08_set_channel(x, channel, tc_type)
 }
@@ -17,7 +17,7 @@ through 8; where X measures voltage in mV with no cold-junction
 compensation, space disables a channel.}
 }
 \description{
-Sets a channel thermocouple type
+Sets a channel thermocouple type.
 }
 \details{
 Set up the channels \emph{before} running in asynchronous mode.

@@ -78,7 +78,17 @@
  *     attr(,"percent")
  *     [1] 100
  *
- * Or, a result of 1 for complete, handle of 1 and 100 percent progress.
+ * Or, a result of 1 for complete, handle of 1 and 100 percent progress. Pending
+ * iterations give:
+ *
+ *     [1] "pending"
+ *     attr(,"handle")
+ *     [1] 0
+ *     attr(,"percent")
+ *     [1] 0
+ *
+ * Notice the zero handle. The only non-zero handle is the handle that the
+ * driver provides.
  */
 [[cpp11::register]] cpp11::strings open_progress_() {
   int16_t handle = 0, percent = 0;
