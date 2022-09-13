@@ -58,6 +58,17 @@ static bool logical_(int x) {
   return usb_tc08_open_unit_async();
 }
 
+/*
+ * First successful iteration gives:
+ *
+ * [1] 1
+ * attr(,"handle")
+ * [1] 1
+ * attr(,"percent")
+ * [1] 100
+ *
+ * Or, a result of 1, handle of 1 and 100 percent progress.
+ */
 [[cpp11::register]] cpp11::integers open_progress_() {
   int16_t handle, percent;
   cpp11::writable::integers x{usb_tc08_open_unit_progress(&handle, &percent)};
