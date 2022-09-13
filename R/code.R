@@ -40,7 +40,7 @@ usb_tc08_open_progress <- function() {
 #' @details Set up the channels \emph{before} running in asynchronous mode.
 #' @param x TC-08 unit, synchronous or asynchronous mode.
 #' @param channel Channel to set.
-#' @param tc_type Type of thermocouple. Must be an integer, not a character.
+#' @param tc_type Type of thermocouple. Must be a character, not an integer.
 #' @export
 usb_tc08_set_channel <- function(x, channel, tc_type) UseMethod("usb_tc08_set_channel", x)
 
