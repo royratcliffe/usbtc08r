@@ -13,6 +13,13 @@ extern "C" SEXP _usbtc08r_units_(SEXP x) {
   END_CPP11
 }
 // code.cpp
+std::string progress_(int16_t x);
+extern "C" SEXP _usbtc08r_progress_(SEXP x) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(progress_(cpp11::as_cpp<cpp11::decay_t<int16_t>>(x)));
+  END_CPP11
+}
+// code.cpp
 std::string error_(int16_t x);
 extern "C" SEXP _usbtc08r_error_(SEXP x) {
   BEGIN_CPP11
@@ -41,7 +48,7 @@ extern "C" SEXP _usbtc08r_open_async_() {
   END_CPP11
 }
 // code.cpp
-cpp11::integers open_progress_();
+cpp11::strings open_progress_();
 extern "C" SEXP _usbtc08r_open_progress_() {
   BEGIN_CPP11
     return cpp11::as_sexp(open_progress_());
@@ -119,6 +126,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_usbtc08r_open_",            (DL_FUNC) &_usbtc08r_open_,            0},
     {"_usbtc08r_open_async_",      (DL_FUNC) &_usbtc08r_open_async_,      0},
     {"_usbtc08r_open_progress_",   (DL_FUNC) &_usbtc08r_open_progress_,   0},
+    {"_usbtc08r_progress_",        (DL_FUNC) &_usbtc08r_progress_,        1},
     {"_usbtc08r_run_",             (DL_FUNC) &_usbtc08r_run_,             2},
     {"_usbtc08r_set_channel_",     (DL_FUNC) &_usbtc08r_set_channel_,     3},
     {"_usbtc08r_stop_",            (DL_FUNC) &_usbtc08r_stop_,            1},
