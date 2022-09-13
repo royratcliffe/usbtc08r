@@ -8,6 +8,8 @@ usb_tc08_get_temp_deskew(x, ...)
 }
 \arguments{
 \item{x}{Opened and running TC-08 in asynchronous mode.}
+
+\item{...}{Additional arguments.}
 }
 \description{
 Get asynchronously-captured de-skewed temperatures.

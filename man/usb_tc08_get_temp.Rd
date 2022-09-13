@@ -8,6 +8,11 @@ usb_tc08_get_temp(x, ...)
 }
 \arguments{
 \item{x}{Opened and running TC-08 in asynchronous mode.}
+
+\item{...}{Additional arguments include:
+\describe{
+\item{\code{length}}{Maximum buffer length.}
+}}
 }
 \description{
 Get temperatures asynchronously.
