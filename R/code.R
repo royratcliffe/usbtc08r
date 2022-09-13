@@ -70,6 +70,20 @@ usb_tc08_stop <- function(x) UseMethod("usb_tc08_stop", x)
 #' @export
 usb_tc08_stop.async_tc08 <- function(x, ...) stop_(x, ...)
 
+#' Get temperatures asynchronously
+#' @export
+usb_tc08_get_temp <- function(x) UseMethod("usb_tc08_get_temp", x)
+
+#' @export
+usb_tc08_get_temp.async_tc08 <- function(x, ...) get_temp_(x, ...)
+
+#' Get asynchronously-captured de-skewed temperatures
+#' @export
+usb_tc08_get_temp_deskew <- function(x) UseMethod("usb_tc08_get_temp_deskew", x)
+
+#' @export
+usb_tc08_get_temp_deskew.async_tc08 <- function(x, ...) get_temp_deskew_(x, ...)
+
 #' Synchronously samples all enabled channels
 #' @param x Opened synchronous-mode TC-08 unit.
 #' @param units Units for resulting temperatures.
