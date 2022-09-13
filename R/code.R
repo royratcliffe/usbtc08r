@@ -19,13 +19,14 @@ usb_tc08_open <- function() {
 
 #' Starts opening TC-08 units asynchronously
 #' @description Asynchronously opens all as-yet-unopened TC-08 units.
+#'   Automatically asserts success by stopping on error.
 #' @details The underlying driver must return 1 as success. All other return
 #'   values trigger an exception, even if not zero. Negative return values occur
 #'   if another attempt to start the asynchronous opening procedure happens.
 #'   Open only once.
 #' @export
 usb_tc08_open_async <- function()
-  if (open_async_() != 1L) stop(error_(get_last_error_(0L)))
+  if (!open_async_()) stop(error_(get_last_error_(0L)))
 
 #' Progressively opens TC-08 units for asynchronous-mode operations
 #' @export
