@@ -14,11 +14,28 @@ static int16_t units_(std::string x) {
   return i->second;
 }
 
-[[cpp11::register]] std::string error_(int16_t error) {
-  switch (error) {
-  case USBTC08_ERROR_OK: return "ok";
-  }
-  return std::to_string(error);
+[[cpp11::register]] std::string error_(int16_t x) {
+  static const std::map<int16_t, std::string> error{
+    {USBTC08_ERROR_OK, "ok"},
+    {USBTC08_ERROR_OS_NOT_SUPPORTED, "os_not_supported"},
+    {USBTC08_ERROR_NO_CHANNELS_SET, "no_channels_set"},
+    {USBTC08_ERROR_INVALID_PARAMETER, "invalid_parameter"},
+    {USBTC08_ERROR_VARIANT_NOT_SUPPORTED, "variant_not_supported"},
+    {USBTC08_ERROR_INCORRECT_MODE, "incorrect_mode"},
+    {USBTC08_ERROR_ENUMERATION_INCOMPLETE, "enumeration_incomplete"},
+    {USBTC08_ERROR_NOT_RESPONDING, "not_responding"},
+    {USBTC08_ERROR_FW_FAIL, "fw_fail"},
+    {USBTC08_ERROR_CONFIG_FAIL, "config_fail"},
+    {USBTC08_ERROR_NOT_FOUND, "not_found"},
+    {USBTC08_ERROR_THREAD_FAIL, "thread_fail"},
+    {USBTC08_ERROR_PIPE_INFO_FAIL, "pipe_info_fail"},
+    {USBTC08_ERROR_NOT_CALIBRATED, "not_calibrated"},
+    {USBTC08_EROOR_PICOPP_TOO_OLD, "picopp_too_old"},
+    {USBTC08_ERROR_COMMUNICATION, "communication"}
+  };
+  auto i = error.find(x);
+  if (i == error.end()) cpp11::stop("invalid integer `%d` value for error", x);
+  return i->second;
 }
 
 /*

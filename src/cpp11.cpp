@@ -6,10 +6,10 @@
 #include <R_ext/Visibility.h>
 
 // code.cpp
-std::string error_(int16_t error);
-extern "C" SEXP _usbtc08r_error_(SEXP error) {
+std::string error_(int16_t x);
+extern "C" SEXP _usbtc08r_error_(SEXP x) {
   BEGIN_CPP11
-    return cpp11::as_sexp(error_(cpp11::as_cpp<cpp11::decay_t<int16_t>>(error)));
+    return cpp11::as_sexp(error_(cpp11::as_cpp<cpp11::decay_t<int16_t>>(x)));
   END_CPP11
 }
 // code.cpp
