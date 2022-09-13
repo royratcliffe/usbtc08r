@@ -165,6 +165,8 @@ cpp11::data_frame get_temp(T (*get_temp)(int16_t, float *, T *, T, int16_t *, in
     "time"_nm = time, "temp"_nm = temp
   };
   x.attr("overflow") = cpp11::writable::logicals{overflow};
+  x.attr("handle") = handle;
+  x.attr("channel") = channel;
   return x;
 }
 
