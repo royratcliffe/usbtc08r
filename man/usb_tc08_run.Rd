@@ -10,7 +10,8 @@ usb_tc08_run(x, interval)
 \item{x}{TC-08 opened for asynchronous-mode operations.}
 
 \item{interval}{Sampling interval in milliseconds between the minimum
-possible level and 65535ms.}
+possible level and 65535ms. A lower limit exists depending on the number of
+enabled channels; 1000ms interval handles all eight channels.}
 }
 \description{
 Runs a TC-08 asynchronously.
