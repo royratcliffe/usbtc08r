@@ -65,23 +65,23 @@
   return usb_tc08_open_unit();
 }
 
-[[cpp11::register]] int16_t open_async_() {
-  return usb_tc08_open_unit_async();
+[[cpp11::register]] bool open_async_() {
+  return logical_(usb_tc08_open_unit_async());
 }
 
 /*
  * First successful iteration gives:
  *
- * [1] 1
- * attr(,"handle")
- * [1] 1
- * attr(,"percent")
- * [1] 100
+ *     [1] "complete"
+ *     attr(,"handle")
+ *     [1] 1
+ *     attr(,"percent")
+ *     [1] 100
  *
- * Or, a result of 1, handle of 1 and 100 percent progress.
+ * Or, a result of 1 for complete, handle of 1 and 100 percent progress.
  */
 [[cpp11::register]] cpp11::strings open_progress_() {
-  int16_t handle, percent;
+  int16_t handle = 0, percent = 0;
   cpp11::writable::strings x{progress_(usb_tc08_open_unit_progress(&handle, &percent))};
   x.attr("handle") = handle;
   x.attr("percent") = percent;
@@ -127,12 +127,12 @@
  * wide. Note the following results compiled indirectly via R's `cpp11` on
  * 64-bit Linux using the standard toolchain.
  *
- *  > cpp11::cpp_eval("sizeof(int16_t)")
- *  [1] 2
- *  > cpp11::cpp_eval("sizeof(int32_t)")
- *  [1] 4
- *  > cpp11::cpp_eval("sizeof(long)")
- *  [1] 8
+ *     > cpp11::cpp_eval("sizeof(int16_t)")
+ *     [1] 2
+ *     > cpp11::cpp_eval("sizeof(int32_t)")
+ *     [1] 4
+ *     > cpp11::cpp_eval("sizeof(long)")
+ *     [1] 8
  */
 template<typename T>
 cpp11::data_frame get_temp(T (*get_temp)(int16_t, float *, T *, T, int16_t *, int16_t, int16_t, int16_t),

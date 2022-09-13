@@ -41,7 +41,7 @@ extern "C" SEXP _usbtc08r_open_() {
   END_CPP11
 }
 // code.cpp
-int16_t open_async_();
+bool open_async_();
 extern "C" SEXP _usbtc08r_open_async_() {
   BEGIN_CPP11
     return cpp11::as_sexp(open_async_());
