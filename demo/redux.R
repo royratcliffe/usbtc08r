@@ -17,6 +17,12 @@ lapply(tc08, usb_tc08_run, 1000L)
 # Note: using the unit handle as an index makes an important assumption about
 # the ordering of units; they must always receive the same handle between
 # restarts, otherwise unit 1 could become unit 2 at some later point in time.
+#
+# While this runs, you can use the following commands such as the following to
+# read arbitrary temperature streams.
+#
+#     redux::hiredis()$command(list("XREAD", "STREAMS", "pico:tc08:1:1", "0"))
+#
 r <- hiredis()
 repeat {
   for (df in apply(expand.grid(unit = tc08, channel = 0:8), 1L, function(x, length, ...)
