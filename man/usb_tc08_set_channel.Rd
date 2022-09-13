@@ -11,7 +11,10 @@ usb_tc08_set_channel(x, channel, tc_type)
 
 \item{channel}{Channel to set.}
 
-\item{tc_type}{Type of thermocouple. Must be a character, not an integer.}
+\item{tc_type}{Type of thermocouple. Must be a character, not an integer.
+Valid types include: B, E, J, K, N, R, S, T, X or space for channels 1
+through 8; where X measures voltage in mV with no cold-junction
+compensation, space disables a channel.}
 }
 \description{
 Sets a channel thermocouple type
