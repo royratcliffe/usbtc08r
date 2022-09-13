@@ -60,6 +60,19 @@ usb_tc08_open_progress <- function() {
 #' tc08 <- usb_tc08_open_async_complete()
 #' lapply(tc08, usb_tc08_set_channel, 1L, "K")
 #' lapply(tc08, usb_tc08_run, 500L)
+#' lapply(tc08, usb_tc08_get_temp, 10L, 1L, "fahrenheit", FALSE)
+#' #> [[1]]
+#' #> time     temp
+#' #> 1  11000 70.82586
+#' #> 2  11500 70.81340
+#' #> 3  12000 70.80757
+#' #> 4  12500 70.78849
+#' #> 5  13000 70.76282
+#' #> 6  13500 70.76358
+#' #> 7  14000 70.81072
+#' #> 8  14500 70.83801
+#' #> 9  15000 70.83879
+#' #> 10 15500 70.85945
 #' }
 usb_tc08_open_async_complete <- function() {
   tc08 <- list()
