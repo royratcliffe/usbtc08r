@@ -6,6 +6,9 @@
 \usage{
 usb_tc08_get_temp(x)
 }
+\arguments{
+\item{x}{Opened and running TC-08 in asynchronous mode.}
+}
 \description{
 Get temperatures asynchronously
 }

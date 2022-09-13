@@ -7,7 +7,7 @@
 #' @return Handle of opened TC-08 unit or \code{NULL} if no more closed units
 #'   available for opening.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' tryCatch(usb_tc08_open(), error = function(e) e)
 #' }
 #' @export
@@ -79,6 +79,7 @@ usb_tc08_stop <- function(x) UseMethod("usb_tc08_stop", x)
 usb_tc08_stop.async_tc08 <- function(x, ...) stop_(x, ...)
 
 #' Get temperatures asynchronously
+#' @param x Opened and running TC-08 in asynchronous mode.
 #' @export
 usb_tc08_get_temp <- function(x) UseMethod("usb_tc08_get_temp", x)
 
@@ -86,6 +87,7 @@ usb_tc08_get_temp <- function(x) UseMethod("usb_tc08_get_temp", x)
 usb_tc08_get_temp.async_tc08 <- function(x, ...) get_temp_(x, ...)
 
 #' Get asynchronously-captured de-skewed temperatures
+#' @param x Opened and running TC-08 in asynchronous mode.
 #' @export
 usb_tc08_get_temp_deskew <- function(x) UseMethod("usb_tc08_get_temp_deskew", x)
 

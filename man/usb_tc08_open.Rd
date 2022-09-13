@@ -20,7 +20,7 @@ Asks for the last error using a zero unit handle if opening fails.
 Handles only represent open units so no handle exists for closed units.
 }
 \examples{
-\dontrun{
+\donttest{
 tryCatch(usb_tc08_open(), error = function(e) e)
 }
 }

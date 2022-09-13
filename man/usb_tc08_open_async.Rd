@@ -8,10 +8,17 @@ usb_tc08_open_async()
 }
 \description{
 Asynchronously opens all as-yet-unopened TC-08 units.
+Automatically asserts success by stopping on error.
 }
 \details{
 The underlying driver must return 1 as success. All other return
 values trigger an exception, even if not zero. Negative return values occur
 if another attempt to start the asynchronous opening procedure happens.
 Open only once.
+}
+\examples{
+\dontrun{
+library(usbtc08r)
+usb_tc08_open_async()
+}
 }
