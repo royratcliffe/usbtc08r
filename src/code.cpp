@@ -54,7 +54,8 @@
 
 /*
  * Some interface functions answer negative integer values for logical success
- * or failure results.
+ * or failure results. The argument as a full integer rather than a short one;
+ * the run interface returns 32 or 64 bits depending on architecture.
  */
 [[cpp11::register]] bool logical_(int x) {
   if (x < 0) cpp11::stop("invalid integer `%d` value for logical", x);
@@ -112,12 +113,12 @@
  * Yes, the return value has a 32-bit width even though it only carries a
  * Boolean type status code: 1 for success, 0 for failure.
  */
-[[cpp11::register]] int32_t run_(int16_t handle, int32_t interval) {
-  return usb_tc08_run(handle, interval);
+[[cpp11::register]] bool run_(int16_t handle, int32_t interval) {
+  return logical_(usb_tc08_run(handle, interval));
 }
 
-[[cpp11::register]] int16_t stop_(int16_t handle) {
-  return usb_tc08_stop(handle);
+[[cpp11::register]] bool stop_(int16_t handle) {
+  return logical_(usb_tc08_stop(handle));
 }
 
 /*
