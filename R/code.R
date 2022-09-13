@@ -53,6 +53,14 @@ usb_tc08_open_progress <- function() {
 #'   results.
 #' @return List of TC-08 units opened and ready for set up and running.
 #' @export
+#' @examples
+#' \donttest{
+#' library(usbtc08r)
+#' usb_tc08_open_async()
+#' tc08 <- usb_tc08_open_async_complete()
+#' lapply(tc08, usb_tc08_set_channel, 1L, "K")
+#' lapply(tc08, usb_tc08_run, 500L)
+#' }
 usb_tc08_open_async_complete <- function() {
   tc08 <- list()
   repeat {
@@ -101,7 +109,7 @@ usb_tc08_stop.async_tc08 <- function(x, ...) stop_(x, ...)
 #' Get temperatures asynchronously.
 #' @param x Opened and running TC-08 in asynchronous mode.
 #' @export
-usb_tc08_get_temp <- function(x) UseMethod("usb_tc08_get_temp", x)
+usb_tc08_get_temp <- function(x, ...) UseMethod("usb_tc08_get_temp", x)
 
 #' @export
 usb_tc08_get_temp.async_tc08 <- function(x, ...) get_temp_(x, ...)
@@ -109,7 +117,7 @@ usb_tc08_get_temp.async_tc08 <- function(x, ...) get_temp_(x, ...)
 #' Get asynchronously-captured de-skewed temperatures.
 #' @param x Opened and running TC-08 in asynchronous mode.
 #' @export
-usb_tc08_get_temp_deskew <- function(x) UseMethod("usb_tc08_get_temp_deskew", x)
+usb_tc08_get_temp_deskew <- function(x, ...) UseMethod("usb_tc08_get_temp_deskew", x)
 
 #' @export
 usb_tc08_get_temp_deskew.async_tc08 <- function(x, ...) get_temp_deskew_(x, ...)

@@ -4,7 +4,7 @@
 \alias{usb_tc08_get_temp}
 \title{Get temperatures asynchronously.}
 \usage{
-usb_tc08_get_temp(x)
+usb_tc08_get_temp(x, ...)
 }
 \arguments{
 \item{x}{Opened and running TC-08 in asynchronous mode.}

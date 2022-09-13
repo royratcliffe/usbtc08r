@@ -16,3 +16,12 @@ Opens all TC-08 units asynchronously to completion.
 Runs aggressively with \emph{no} delay between pending progress
 results.
 }
+\examples{
+\donttest{
+library(usbtc08r)
+usb_tc08_open_async()
+tc08 <- usb_tc08_open_async_complete()
+lapply(tc08, usb_tc08_set_channel, 1L, "K")
+lapply(tc08, usb_tc08_run, 500L)
+}
+}
