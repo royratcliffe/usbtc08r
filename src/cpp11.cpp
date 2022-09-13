@@ -97,7 +97,7 @@ extern "C" SEXP _usbtc08r_get_single_(SEXP handle, SEXP units) {
   END_CPP11
 }
 // code.cpp
-int16_t close_(int16_t handle);
+bool close_(int16_t handle);
 extern "C" SEXP _usbtc08r_close_(SEXP handle) {
   BEGIN_CPP11
     return cpp11::as_sexp(close_(cpp11::as_cpp<cpp11::decay_t<int16_t>>(handle)));

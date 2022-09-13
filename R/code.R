@@ -159,7 +159,7 @@ usb_tc08_get_single.sync_tc08 <- function(x, ...) get_single_(x, ...)
 usb_tc08_close <- function(x) UseMethod("usb_tc08_close", x)
 
 #' @export
-usb_tc08_close.tc08 <- function(x) if (close_(x) < 1L) stop(error_(get_last_error_(x)))
+usb_tc08_close.tc08 <- function(x) if (!close_(x)) stop(error_(get_last_error_(x)))
 
 #' Gets last error of TC-08 unit.
 #' @param x Open TC-08 unit.

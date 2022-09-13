@@ -191,8 +191,8 @@ cpp11::data_frame get_temp(T (*get_temp)(int16_t, float *, T *, T, int16_t *, in
   return x;
 }
 
-[[cpp11::register]] int16_t close_(int16_t handle) {
-  return usb_tc08_close_unit(handle);
+[[cpp11::register]] bool close_(int16_t handle) {
+  return logical_(usb_tc08_close_unit(handle));
 }
 
 [[cpp11::register]] int16_t get_last_error_(int16_t handle) {
