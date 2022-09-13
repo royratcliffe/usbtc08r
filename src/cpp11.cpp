@@ -62,14 +62,14 @@ extern "C" SEXP _usbtc08r_set_channel_(SEXP handle, SEXP channel, SEXP tc_type) 
   END_CPP11
 }
 // code.cpp
-int32_t run_(int16_t handle, int32_t interval);
+bool run_(int16_t handle, int32_t interval);
 extern "C" SEXP _usbtc08r_run_(SEXP handle, SEXP interval) {
   BEGIN_CPP11
     return cpp11::as_sexp(run_(cpp11::as_cpp<cpp11::decay_t<int16_t>>(handle), cpp11::as_cpp<cpp11::decay_t<int32_t>>(interval)));
   END_CPP11
 }
 // code.cpp
-int16_t stop_(int16_t handle);
+bool stop_(int16_t handle);
 extern "C" SEXP _usbtc08r_stop_(SEXP handle) {
   BEGIN_CPP11
     return cpp11::as_sexp(stop_(cpp11::as_cpp<cpp11::decay_t<int16_t>>(handle)));
