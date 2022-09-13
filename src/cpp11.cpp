@@ -6,10 +6,24 @@
 #include <R_ext/Visibility.h>
 
 // code.cpp
+int16_t units_(std::string x);
+extern "C" SEXP _usbtc08r_units_(SEXP x) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(units_(cpp11::as_cpp<cpp11::decay_t<std::string>>(x)));
+  END_CPP11
+}
+// code.cpp
 std::string error_(int16_t x);
 extern "C" SEXP _usbtc08r_error_(SEXP x) {
   BEGIN_CPP11
     return cpp11::as_sexp(error_(cpp11::as_cpp<cpp11::decay_t<int16_t>>(x)));
+  END_CPP11
+}
+// code.cpp
+bool logical_(int x);
+extern "C" SEXP _usbtc08r_logical_(SEXP x) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(logical_(cpp11::as_cpp<cpp11::decay_t<int>>(x)));
   END_CPP11
 }
 // code.cpp
@@ -101,12 +115,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"_usbtc08r_get_single_",      (DL_FUNC) &_usbtc08r_get_single_,      2},
     {"_usbtc08r_get_temp_",        (DL_FUNC) &_usbtc08r_get_temp_,        5},
     {"_usbtc08r_get_temp_deskew_", (DL_FUNC) &_usbtc08r_get_temp_deskew_, 5},
+    {"_usbtc08r_logical_",         (DL_FUNC) &_usbtc08r_logical_,         1},
     {"_usbtc08r_open_",            (DL_FUNC) &_usbtc08r_open_,            0},
     {"_usbtc08r_open_async_",      (DL_FUNC) &_usbtc08r_open_async_,      0},
     {"_usbtc08r_open_progress_",   (DL_FUNC) &_usbtc08r_open_progress_,   0},
     {"_usbtc08r_run_",             (DL_FUNC) &_usbtc08r_run_,             2},
     {"_usbtc08r_set_channel_",     (DL_FUNC) &_usbtc08r_set_channel_,     3},
     {"_usbtc08r_stop_",            (DL_FUNC) &_usbtc08r_stop_,            1},
+    {"_usbtc08r_units_",           (DL_FUNC) &_usbtc08r_units_,           1},
     {"run_testthat_tests",         (DL_FUNC) &run_testthat_tests,         1},
     {NULL, NULL, 0}
 };

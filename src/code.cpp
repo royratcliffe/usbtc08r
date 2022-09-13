@@ -2,7 +2,7 @@
 
 #include <map>
 
-static int16_t units_(std::string x) {
+[[cpp11::register]] int16_t units_(std::string x) {
   static const std::map<std::string, int16_t> units{
     {"centigrade", USBTC08_UNITS_CENTIGRADE},
     {"fahrenheit", USBTC08_UNITS_FAHRENHEIT},
@@ -45,7 +45,7 @@ static int16_t units_(std::string x) {
  * Some interface functions answer negative integer values for logical success
  * or failure results.
  */
-static bool logical_(int x) {
+[[cpp11::register]] bool logical_(int x) {
   if (x < 0) cpp11::stop("invalid integer `%d` value for logical", x);
   return x > 0;
 }
@@ -124,8 +124,8 @@ static bool logical_(int x) {
  *  [1] 8
  */
 template<typename T>
-static cpp11::data_frame get_temp(T (*get_temp)(int16_t, float *, T *, T, int16_t *, int16_t, int16_t, int16_t),
-                                  int16_t handle, int32_t length, int16_t channel, std::string units, bool fill) {
+cpp11::data_frame get_temp(T (*get_temp)(int16_t, float *, T *, T, int16_t *, int16_t, int16_t, int16_t),
+                           int16_t handle, int32_t length, int16_t channel, std::string units, bool fill) {
   int16_t overflow;
   auto temp_buffer = new float[length];
   auto time_buffer = new T[length];
