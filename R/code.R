@@ -104,7 +104,8 @@ usb_tc08_set_channel.tc08 <- function(x, ...) set_channel_(x, ...)
 #'   \code{\link[usbtc08r]{usb_tc08_stop}} to stop the run, before closing.
 #' @param x TC-08 opened for asynchronous-mode operations.
 #' @param interval Sampling interval in milliseconds between the minimum
-#'   possible level and 65535ms.
+#'   possible level and 65535ms. A lower limit exists depending on the number of
+#'   enabled channels; 1000ms interval handles all eight channels.
 #' @export
 usb_tc08_run <- function(x, interval) UseMethod("usb_tc08_run", x)
 
