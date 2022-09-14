@@ -23,15 +23,19 @@ lapply(tc08, usb_tc08_run, 1000L)
 #
 #     redux::hiredis()$command(list("XREAD", "STREAMS", "pico:tc08:1:1", "0"))
 #
+# Run from R Studio as a background job using:
+#
+#     rstudioapi::jobRunScript(system.file("demo", "redux.R", package = "usbtc08r"))
+#
 r <- hiredis()
 repeat {
-  for (df in apply(expand.grid(unit = tc08, channel = 0:8), 1L, function(x, length, ...)
-    usb_tc08_get_temp_deskew(x$unit, length, x$channel, ...), 10L, "centigrade", FALSE)) {
-    if (nrow(df) != 0L) {
+  lapply(apply(expand.grid(unit = tc08, channel = 0:8), 1L, function(x, length, ...)
+    usb_tc08_get_temp_deskew(x$unit, length, x$channel, ...), 10L, "centigrade", FALSE),
+    function(df) {
+      if (nrow(df) == 0L) return(NULL)
       key <- sprintf("pico:tc08:%d:%d", attr(df, "handle"), attr(df, "channel"))
-      for (row in 1:nrow(df)) {
-        r$command(list("XADD", key, "*", "time", df[row, "time"], "temp", df[row, "temp"]))
-      }
-    }
-  }
+      apply(df, 1L, function(row) {
+        r$command(list("XADD", key, "*", "time", row["time"], "temp", row["temp"]))
+      })
+    })
 }
