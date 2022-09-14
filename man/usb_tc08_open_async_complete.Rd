@@ -18,12 +18,16 @@ results.
 }
 \examples{
 \donttest{
+# The following example catches opening-to-completion failures by closing any
+# TC-08 units that successfully opened prior to the error.
 library(usbtc08r)
-usb_tc08_open_async()
-tc08 <- usb_tc08_open_async_complete()
-lapply(tc08, usb_tc08_set_channel, 1L, "K")
-lapply(tc08, usb_tc08_run, 500L)
-lapply(tc08, usb_tc08_get_temp, 10L, 1L, "fahrenheit", FALSE)
+tc08 <- list()
+tryCatch({usb_tc08_open_async()
+  tc08 <- usb_tc08_open_async_complete()
+  lapply(tc08, usb_tc08_set_channel, 1L, "K")
+  lapply(tc08, usb_tc08_run, 500L)
+  lapply(tc08, usb_tc08_get_temp, 10L, 1L, "fahrenheit", FALSE)
+}, error = identity, finally = lapply(tc08, usb_tc08_close))
 #> [[1]]
 #> time     temp
 #> 1  11000 70.82586

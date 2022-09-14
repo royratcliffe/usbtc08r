@@ -19,6 +19,6 @@ Open only once.
 \examples{
 \donttest{
 library(usbtc08r)
-usb_tc08_open_async()
+tryCatch(usb_tc08_open_async(), error = identity)
 }
 }
