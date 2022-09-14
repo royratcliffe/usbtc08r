@@ -5,3 +5,5 @@
 #endif
 
 #include <cpp11.hpp>
+
+int16_t units_(std::string x);
