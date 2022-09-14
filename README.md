@@ -16,11 +16,19 @@ The goal of usbtc08r is to …
 
 ## Installation
 
-You can install the development version of usbtc08r like so:
+You can install the development version of `usbtc08r` like so, starting
+with `devtools` if not already installed:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+install.packages("devtools")
+remotes::install_github("royratcliffe/usbtc08r", "royratcliffe-patch-3")
 ```
+
+Before installation can succeed, you first need to install Pico
+Technology’s `libusbtc08` driver library. Install the PicoSDK on
+Windows, or on macOS, but install using Aptitude as package
+`libusbtc08-dev` on Linux. The build process needs access to the
+driver’s header and shared library.
 
 ## Example
 
