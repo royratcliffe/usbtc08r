@@ -29,3 +29,14 @@ This is a basic example which shows you how to solve a common problem:
 library(usbtc08r)
 ## basic example code
 ```
+
+## Rtools on Windows
+
+You need [Rtools](https://cran.r-project.org/bin/windows/Rtools/) to
+build the package on Windows. The package includes C++, so needs the
+compiler toolchain. Check for package build problems using the
+`pkgbuild` package.
+
+``` r
+pkgbuild::check_build_tools(debug = TRUE)
+```
