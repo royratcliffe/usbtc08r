@@ -34,7 +34,14 @@ You can install the development version of usbtc08r like so:
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example}
+```{r example, eval=FALSE}
 library(usbtc08r)
 ## basic example code
+```
+
+## Rtools on Windows
+
+You need [Rtools](https://cran.r-project.org/bin/windows/Rtools/) to build the package on Windows. The package includes C++, so needs the compiler toolchain. Check for package build problems using the `pkgbuild` package.
+```{r eval=FALSE}
+pkgbuild::check_build_tools(debug = TRUE)
 ```

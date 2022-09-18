@@ -20,21 +20,158 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// get_last_error
-int get_last_error(int handle);
-RcppExport SEXP _usbtc08r_get_last_error(SEXP handleSEXP) {
+// open_unit_async
+int open_unit_async();
+RcppExport SEXP _usbtc08r_open_unit_async() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(open_unit_async());
+    return rcpp_result_gen;
+END_RCPP
+}
+// open_unit_progress
+List open_unit_progress();
+RcppExport SEXP _usbtc08r_open_unit_progress() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(open_unit_progress());
+    return rcpp_result_gen;
+END_RCPP
+}
+// close_unit
+int close_unit(int handle);
+RcppExport SEXP _usbtc08r_close_unit(SEXP handleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< int >::type handle(handleSEXP);
+    rcpp_result_gen = Rcpp::wrap(close_unit(handle));
+    return rcpp_result_gen;
+END_RCPP
+}
+// stop_unit
+int stop_unit(int handle);
+RcppExport SEXP _usbtc08r_stop_unit(SEXP handleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type handle(handleSEXP);
+    rcpp_result_gen = Rcpp::wrap(stop_unit(handle));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_minimum_interval_ms
+long get_minimum_interval_ms(int handle);
+RcppExport SEXP _usbtc08r_get_minimum_interval_ms(SEXP handleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type handle(handleSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_minimum_interval_ms(handle));
+    return rcpp_result_gen;
+END_RCPP
+}
+// set_channel
+short set_channel(short handle, short channel, char tc_type);
+RcppExport SEXP _usbtc08r_set_channel(SEXP handleSEXP, SEXP channelSEXP, SEXP tc_typeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< short >::type handle(handleSEXP);
+    Rcpp::traits::input_parameter< short >::type channel(channelSEXP);
+    Rcpp::traits::input_parameter< char >::type tc_type(tc_typeSEXP);
+    rcpp_result_gen = Rcpp::wrap(set_channel(handle, channel, tc_type));
+    return rcpp_result_gen;
+END_RCPP
+}
+// run
+long run(short handle, long interval_ms);
+RcppExport SEXP _usbtc08r_run(SEXP handleSEXP, SEXP interval_msSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< short >::type handle(handleSEXP);
+    Rcpp::traits::input_parameter< long >::type interval_ms(interval_msSEXP);
+    rcpp_result_gen = Rcpp::wrap(run(handle, interval_ms));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_temp
+List get_temp(short handle, long buffer_length, short channel, short units, short fill_missing);
+RcppExport SEXP _usbtc08r_get_temp(SEXP handleSEXP, SEXP buffer_lengthSEXP, SEXP channelSEXP, SEXP unitsSEXP, SEXP fill_missingSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< short >::type handle(handleSEXP);
+    Rcpp::traits::input_parameter< long >::type buffer_length(buffer_lengthSEXP);
+    Rcpp::traits::input_parameter< short >::type channel(channelSEXP);
+    Rcpp::traits::input_parameter< short >::type units(unitsSEXP);
+    Rcpp::traits::input_parameter< short >::type fill_missing(fill_missingSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_temp(handle, buffer_length, channel, units, fill_missing));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_single
+List get_single(short handle, short units);
+RcppExport SEXP _usbtc08r_get_single(SEXP handleSEXP, SEXP unitsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< short >::type handle(handleSEXP);
+    Rcpp::traits::input_parameter< short >::type units(unitsSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_single(handle, units));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_unit_info
+Nullable<List> get_unit_info(int handle);
+RcppExport SEXP _usbtc08r_get_unit_info(SEXP handleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type handle(handleSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_unit_info(handle));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_last_error
+short get_last_error(short handle);
+RcppExport SEXP _usbtc08r_get_last_error(SEXP handleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< short >::type handle(handleSEXP);
     rcpp_result_gen = Rcpp::wrap(get_last_error(handle));
+    return rcpp_result_gen;
+END_RCPP
+}
+// error
+IntegerVector error();
+RcppExport SEXP _usbtc08r_error() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(error());
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_usbtc08r_open_unit", (DL_FUNC) &_usbtc08r_open_unit, 0},
+    {"_usbtc08r_open_unit_async", (DL_FUNC) &_usbtc08r_open_unit_async, 0},
+    {"_usbtc08r_open_unit_progress", (DL_FUNC) &_usbtc08r_open_unit_progress, 0},
+    {"_usbtc08r_close_unit", (DL_FUNC) &_usbtc08r_close_unit, 1},
+    {"_usbtc08r_stop_unit", (DL_FUNC) &_usbtc08r_stop_unit, 1},
+    {"_usbtc08r_get_minimum_interval_ms", (DL_FUNC) &_usbtc08r_get_minimum_interval_ms, 1},
+    {"_usbtc08r_set_channel", (DL_FUNC) &_usbtc08r_set_channel, 3},
+    {"_usbtc08r_run", (DL_FUNC) &_usbtc08r_run, 2},
+    {"_usbtc08r_get_temp", (DL_FUNC) &_usbtc08r_get_temp, 5},
+    {"_usbtc08r_get_single", (DL_FUNC) &_usbtc08r_get_single, 2},
+    {"_usbtc08r_get_unit_info", (DL_FUNC) &_usbtc08r_get_unit_info, 1},
     {"_usbtc08r_get_last_error", (DL_FUNC) &_usbtc08r_get_last_error, 1},
+    {"_usbtc08r_error", (DL_FUNC) &_usbtc08r_error, 0},
     {NULL, NULL, 0}
 };
 
