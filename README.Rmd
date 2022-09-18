@@ -45,7 +45,7 @@ pkgbuild::check_build_tools(debug = TRUE)
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example}
+```{r example, eval=FALSE, include=TRUE}
 library(usbtc08r)
 ## basic example code
 ```
