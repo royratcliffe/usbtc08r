@@ -30,6 +30,17 @@ Windows, or on macOS, but install using Aptitude as package
 `libusbtc08-dev` on Linux. The build process needs access to the
 driver’s header and shared library.
 
+### Rtools on Windows
+
+You need [Rtools](https://cran.r-project.org/bin/windows/Rtools/) to
+build the package on Windows. The package includes C++, so needs the
+compiler toolchain. Check for package build problems using the
+`pkgbuild` package.
+
+``` r
+pkgbuild::check_build_tools(debug = TRUE)
+```
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
