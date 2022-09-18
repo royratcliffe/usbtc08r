@@ -27,12 +27,15 @@ lapply(tc08, usb_tc08_run, 1000L)
 #
 #     rstudioapi::jobRunScript(system.file("demo", "redux.R", package = "usbtc08r"))
 #
+# One more thing to note: grid expanding the unit-channel permutations delivers a list of data frames tagged with unit handle and channel attributes. One or more resulting data frames may be empty, not null but a valid frame with no rows; e.g. `apply(data.frame(a = NULL, b = NULL), 1L, identity)` answers `logical(0)`, a zero-length logical vector.
 r <- hiredis()
 repeat {
-  lapply(apply(expand.grid(unit = tc08, channel = 0:8), 1L, function(x, length, ...)
-    usb_tc08_get_temp_deskew(x$unit, length, x$channel, ...), 10L, "centigrade", FALSE),
+  lapply(apply(expand.grid(unit = tc08, channel = 0:8), 1L,
+               function(x, length, ...)
+                 usb_tc08_get_temp_deskew(x$unit, length, x$channel, ...),
+               10L, "centigrade", FALSE, simplify = FALSE),
     function(df) {
-      if (nrow(df) == 0L) return(NULL)
+      if (nrow(df) == 0L) return(Sys.sleep(1))
       key <- sprintf("pico:tc08:%d:%d", attr(df, "handle"), attr(df, "channel"))
       apply(df, 1L, function(row) {
         r$command(list("XADD", key, "*", "time", row["time"], "temp", row["temp"]))
