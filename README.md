@@ -50,6 +50,29 @@ library(usbtc08r)
 ## basic example code
 ```
 
+## Unit Behaviour, Synchronous and Asynchronous
+
+Each unit comprises nine channels. Strictly speaking, using Unified
+Modelling nomenclature, units *compose* of channels; the life time of
+the channel strictly depends on its unit. Units “have” channels, the
+[stronger form of
+aggregation](https://www.uml-diagrams.org/composition.html).
+
+Units have two modes of operation: synchronous and asynchronous. The
+difference between these modes extends beyond the driver threading
+model. A unit itself switches mode accordingly and precludes behaviours
+from the non-operating mode. Specifically, asking for a single sample
+set fails when running asynchronously. Software experimentation quickly
+discovers this limitation, or feature, which impacts driver acquisition
+design.
+
+Asynchronous mode switches the unit into a more advanced form of
+temperature data collection where the Pico Technology firmware records
+time-stamped temperature readings for all its enabled channels. By
+implication, therefore, channel set-up always precedes acquisition; nor
+can set-up interlace with asynchronous running. Switching thermocouple
+types requires a shut-down and re-start.
+
 ## References
 
 -   [libusbtc08-1—Hardware interface library for PicoTech USB TC08
