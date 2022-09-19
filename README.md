@@ -75,14 +75,21 @@ types requires a shut-down and re-start.
 
 ## References
 
--   [libusbtc08-1—Hardware interface library for PicoTech USB TC08
-    Thermocouple sensor](https://reposcope.com/package/libusbtc08-1)
+Useful links below.
+
+-   [TC-08 thermocouple data
+    logger](https://www.picotech.com/data-logger/tc-08/thermocouple-data-logger),
+    manufacturer’s page
 -   [Linux Software & Drivers for Oscilloscopes and Data
     Loggers](https://www.picotech.com/downloads/linux)
--   [Pico Technology at GitHub](https://github.com/picotech)
--   [TC-08 thermocouple data
-    logger](https://www.picotech.com/data-logger/tc-08/thermocouple-data-logger)
+-   [Pico Technology at GitHub](https://github.com/picotech), Pico
+    Technology GitHub organisation
 -   [Pico SDK C examples at
-    GitHub](https://github.com/picotech/picosdk-c-examples/tree/master/usbtc08)
+    GitHub](https://github.com/picotech/picosdk-c-examples/tree/master/usbtc08),
+    manufacturer’s C examples
 -   [USB TC-08 Thermocouple Data Logger MATLAB
-    Examples](https://github.com/picotech/picosdk-usbtc08-matlab-examples)
+    Examples](https://github.com/picotech/picosdk-usbtc08-matlab-examples),
+    manufacturer’s MATLAB examples
+-   [libusbtc08-1—Hardware interface library for PicoTech USB TC08
+    Thermocouple sensor](https://reposcope.com/package/libusbtc08-1),
+    Linux repositories inspector
