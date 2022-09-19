@@ -49,3 +49,17 @@ This is a basic example which shows you how to solve a common problem:
 library(usbtc08r)
 ## basic example code
 ```
+
+## References
+
+-   [libusbtc08-1—Hardware interface library for PicoTech USB TC08
+    Thermocouple sensor](https://reposcope.com/package/libusbtc08-1)
+-   [Linux Software & Drivers for Oscilloscopes and Data
+    Loggers](https://www.picotech.com/downloads/linux)
+-   [Pico Technology at GitHub](https://github.com/picotech)
+-   [TC-08 thermocouple data
+    logger](https://www.picotech.com/data-logger/tc-08/thermocouple-data-logger)
+-   [Pico SDK C examples at
+    GitHub](https://github.com/picotech/picosdk-c-examples/tree/master/usbtc08)
+-   [USB TC-08 Thermocouple Data Logger MATLAB
+    Examples](https://github.com/picotech/picosdk-usbtc08-matlab-examples)
