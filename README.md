@@ -16,8 +16,8 @@ The goal of usbtc08r is to …
 
 ## Installation
 
-You can install the development version of `usbtc08r` like so, starting
-with `devtools` if not already installed:
+You can install the development version of `usbtc08r` as follows,
+starting with `devtools` if not already installed:
 
 ``` r
 install.packages("devtools")
