@@ -32,17 +32,23 @@ lapply(tc08, usb_tc08_run, 1000L)
 # more resulting data frames may be empty, not null but a valid frame with no
 # rows; e.g. `apply(data.frame(a = NULL, b = NULL), 1L, identity)` answers
 # `logical(0)`, a zero-length logical vector.
+#
+# Sleeps if all channels answer nothing but not if at least one channel provides
+# some data frame. The device exhibits all-or-nothing behaviour typically: all
+# the channels buffer the same number of temperatures. The demo here filters the
+# captured temperature frames for empty rows. The demo sleeps for 100
+# milliseconds only when all frames prove empty.
+unit.chan <- expand.grid(unit = tc08, channel = 0:8)
+xadd_time_temp <- function(r, key, row)
+  r$command(list("XADD", key, "*", "time", row["time"], "temp", row["temp"]))
 r <- hiredis()
 repeat {
-  lapply(apply(expand.grid(unit = tc08, channel = 0:8), 1L,
-               function(x, length, ...)
-                 usb_tc08_get_temp_deskew(x$unit, length, x$channel, ...),
-               10L, "centigrade", FALSE, simplify = FALSE),
-    function(df) {
-      if (nrow(df) == 0L) return(Sys.sleep(1))
-      key <- sprintf("pico:tc08:%d:%d", attr(df, "handle"), attr(df, "channel"))
-      apply(df, 1L, function(row) {
-        r$command(list("XADD", key, "*", "time", row["time"], "temp", row["temp"]))
-      })
-    })
+  time.temps <- Filter(function(df)
+    nrow(df) != 0L, apply(unit.chan, 1L, function(x, length, ...)
+      usb_tc08_get_temp_deskew(x$unit, length, x$channel, ...),
+      10L, "centigrade", FALSE, simplify = FALSE))
+  if (length(lapply(time.temps, function(df) {
+    key <- sprintf("pico:tc08:%d:%d", attr(df, "handle"), attr(df, "channel"))
+    apply(df, 1L, function(row) xadd_time_temp(r, key, row))
+  })) == 0L) Sys.sleep(0.1)
 }
