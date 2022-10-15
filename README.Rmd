@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# usbtc08r
+# USB 8-Channel Thermocouple for R (`usbtc08r` Package)
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/royratcliffe/usbtc08r/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/royratcliffe/usbtc08r/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of usbtc08r is to ...
+The goal of the R package `usbtc08r` is to provide the thinnest amount of software wrapping between R and the Pico Technology TC-08 via C++. The package acts as a thin shimming layer. While it provides access for R to the underlying vendor interface with suitable mapping between C types and R types, the package also adds higher-level functions that operate using the vendor interface, e.g. synchronous and non-synchronous initialisation.
 
 ## Installation
 
