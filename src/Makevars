@@ -1,1 +1,2 @@
 PKG_LIBS = -lusbtc08
+CXX_STD = CXX11
