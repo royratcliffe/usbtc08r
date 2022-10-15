@@ -43,11 +43,16 @@ pkgbuild::check_build_tools(debug = TRUE)
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Connect one or more Pico TC-08 devices to your computer and initialise using:
 
 ```{r example, eval=FALSE, include=TRUE}
 library(usbtc08r)
-## basic example code
+
+usb_tc08_open_async()
+tc08 <- usb_tc08_open_async_complete()
+apply(expand.grid(unit = tc08, channel = 1:8), 1L, function(x)
+  usb_tc08_set_channel(x$unit, x$channel, "K"))
+lapply(tc08, usb_tc08_run, 1000L)
 ```
 
 ## Unit Behaviour, Synchronous and Asynchronous
