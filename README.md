@@ -32,7 +32,7 @@ remotes::install_github("royratcliffe/usbtc08r", "main")
 
 Before installation can succeed, you first need to install Pico
 Technology’s `libusbtc08` driver library. Install the PicoSDK on
-Windows, or on macOS, but install using Aptitude as the package
+Windows, or macOS, but install using Aptitude as the package
 `libusbtc08-dev` on Linux. The build process needs access to the
 driver’s header files and shared library; hence the `dev` package for
 the headers.
@@ -51,7 +51,7 @@ pkgbuild::check_build_tools(debug = TRUE)
 ## Example
 
 Connect one or more Pico TC-08 devices to your computer and initialise
-using:
+using the exemplar code listed below:
 
 ``` r
 library(usbtc08r)
@@ -85,6 +85,20 @@ time-stamped temperature readings for all its enabled channels. By
 implication, therefore, channel set-up always precedes acquisition; nor
 can set-up interlace with asynchronous running. Switching thermocouple
 types requires a shutdown and re-start.
+
+## Trapping errors
+
+The R functions wrap ‘error trapping’ by performing two important
+sub-duties:
+
+1.  detect errors by testing return values and thereby discern non-error
+    values and their meaning;
+2.  translate error codes to R exceptions thereby making it easier to
+    plot execution paths in client-level user code.
+
+Generally speaking, the driver interface functions have *signed* 16-bit
+integer return values returning positive values on success, and negative
+on failure.
 
 ## References
 
