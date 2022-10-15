@@ -32,7 +32,7 @@ install.packages("devtools")
 remotes::install_github("royratcliffe/usbtc08r", "main")
 ```
 
-Before installation can succeed, you first need to install Pico Technology's `libusbtc08` driver library. Install the PicoSDK on Windows, or on macOS, but install using Aptitude as the package `libusbtc08-dev` on Linux. The build process needs access to the driver's header and shared library.
+Before installation can succeed, you first need to install Pico Technology's `libusbtc08` driver library. Install the PicoSDK on Windows, or on macOS, but install using Aptitude as the package `libusbtc08-dev` on Linux. The build process needs access to the driver's header files and shared library; hence the `dev` package for the headers.
 
 ### Rtools on Windows
 
