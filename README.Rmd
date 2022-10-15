@@ -63,6 +63,15 @@ Units have two modes of operation: synchronous and asynchronous. The difference 
 
 Asynchronous mode switches the unit into a more advanced form of temperature data collection where the Pico Technology firmware records time-stamped temperature readings for all its enabled channels. By implication, therefore, channel set-up always precedes acquisition; nor can set-up interlace with asynchronous running. Switching thermocouple types requires a shutdown and re-start.
 
+## Trapping errors
+
+The R functions wrap 'error trapping' by performing two important sub-duties:
+
+1. detect errors by testing return values and thereby discern non-error values and their meaning;
+2. translate error codes to R exceptions thereby making it easier to plot execution paths in client-level user code.
+
+Generally speaking, the driver interface functions have _signed_ 16-bit integer return values returning positive values on success, and negative on failure.
+
 ## References
 
 Useful links are below.
