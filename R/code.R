@@ -30,8 +30,7 @@ usb_tc08_open <- function() {
 #' library(usbtc08r)
 #' tryCatch(usb_tc08_open_async(), error = identity)
 #' }
-usb_tc08_open_async <- function()
-  if (!open_async_()) stop(error_(get_last_error_(0L)))
+usb_tc08_open_async <- function() if (!open_async_()) stop(error_(get_last_error_(0L)))
 
 #' Progressively opens TC-08 units for asynchronous-mode operations.
 #' @return Progress string, one of: pending or complete. Does \emph{not} return
