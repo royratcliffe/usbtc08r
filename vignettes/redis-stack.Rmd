@@ -1,0 +1,31 @@
+---
+title: "Redis Stack"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Redis Stack}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(usbtc08r)
+```
+
+## Docker container stack
+
+### Redis and Redis Insight stack
+Publishes ports 6379 and 8001 respectively. Read [more about Redis Insight](https://docs.redis.com/latest/ri/).
+
+### `pico-tc08` service
+1. Based on `rocker/r-ver` version 4 or above.
+2. Requires privileged for access to USB-connected thermocouple device, or devices. Supports multiple devices of nine channels each.
+3. Container requires additional development libraries: `libusbtc08-dev` and `libhiredis-dev`.
+
+The container requires `remotes` explicitly. The `littler` scripts, specifically the GitHub installer, does _not_ install `remotes` automatically; rather, it presumes preinstalled. Tempting to remove the development packages for `libusbtc08` and `libhiredis` since no longer required after compilation. However, auto-remove will remove the shared-library packages; these _are_ required by the streaming process run-time.
