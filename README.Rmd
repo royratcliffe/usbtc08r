@@ -55,6 +55,8 @@ apply(expand.grid(unit = tc08, channel = 1:8), 1L, function(x)
 lapply(tc08, usb_tc08_run, 1000L)
 ```
 
+The Pico Technology eight-channel thermocouple in asynchronous mode outputs time-stamped temperatures in buffered blocks. Buffered blocks of timed temperatures comprise an ordered list of time-temperature pairs. Time stamps have millisecond dimensions relative to the start of the asynchronous sampling process. The thermocouple instrument continuously samples its channels internally, filling an internal buffer until the connected host reads the buffer over USB.
+
 ## Unit Behaviour, Synchronous and Asynchronous
 
 Each unit comprises nine channels. Strictly speaking, using Unified Modelling nomenclature, units _compose_ of channels; the lifetime of the channel strictly depends on its unit. Units "have" channels, the [stronger form of aggregation](https://www.uml-diagrams.org/composition.html).
