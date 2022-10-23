@@ -10,6 +10,8 @@ Authors@R:
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0),
     xml2
 Config/testthat/edition: 3
@@ -20,3 +22,4 @@ LinkingTo:
     cpp11,
     testthat
 SystemRequirements: C++11
+VignetteBuilder: knitr
