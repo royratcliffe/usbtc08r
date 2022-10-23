@@ -55,7 +55,27 @@ apply(expand.grid(unit = tc08, channel = 1:8), 1L, function(x)
 lapply(tc08, usb_tc08_run, 1000L)
 ```
 
+This snippet opens all attached TC-08 devices, one or more, for asynchronous temperature sampling. Opening starts and opening itself runs asynchronously until complete. The result is a list of device unit handles. The snippet expands the list by channel for channels one through eight and applies a channel set request to each unit channel for K-type thermocouple and enables each one. Finally, it runs each unit with a 1,000-millisecond sampling interval or one sample continuously for all enabled channels every second.
+
 The Pico Technology eight-channel thermocouple in asynchronous mode outputs time-stamped temperatures in buffered blocks. Buffered blocks of timed temperatures comprise an ordered list of time-temperature pairs. Time stamps have millisecond dimensions relative to the start of the asynchronous sampling process. The thermocouple instrument continuously samples its channels internally, filling an internal buffer until the connected host reads the buffer over USB.
+
+Once set up, a task needs to periodically read the channels along the following lines.
+
+```r
+unit.chan <- expand.grid(unit = tc08, channel = 0:8)
+repeat {
+  time.temps <- Filter(function(df)
+    nrow(df) != 0L, apply(unit.chan, 1L, function(x, length, ...)
+      usb_tc08_get_temp_deskew(x$unit, length, x$channel, ...),
+      10L, "centigrade", FALSE, simplify = FALSE))
+  if (length(lapply(time.temps, function(df) {
+    key <- sprintf("pico:tc08:%d:%d", attr(df, "handle"), attr(df, "channel"))
+    apply(df, 1L, function(row) cat(key, row["time"], row["temp"], "\n"))
+  })) == 0L) Sys.sleep(0.1)
+}
+```
+
+This example calls `usb_tc08_get_temp_deskew` but the interface also makes equivalent `usb_tc08_get_temp` available. Both functions read the temperature buffers. The repeat loop applies "get temp" to the unit channel grid, thereby running once for each unit-channel permutation. Channels have indices 0 through 8 inclusive. The calls ask for 10 samples at a time in Centigrade units. The result is a list of time-temperature data frames. The snippet filters out empty frames. The second half of the repeat loop outputs the times and temperatures by row for each non-empty data frame; else sleeps for 100 milliseconds if all empty. The sleep idles the task for a short while but only if nothing at all reads from any attached device. Call this a greedy approach: crunch until nothing left to eat.
 
 ## Unit Behaviour, Synchronous and Asynchronous
 
