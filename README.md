@@ -102,7 +102,7 @@ makes equivalent `usb_tc08_get_temp` available. Both functions read the
 temperature buffers. The repeat loop applies “get temp” to the unit
 channel grid, thereby running once for each unit-channel permutation.
 Channels have indices 0 through 8 inclusive. The calls ask for 10
-samples at a time in Centrigrade units. The result is a list of
+samples at a time in Centigrade units. The result is a list of
 time-temperature data frames. The snippet filters out empty frames. The
 second half of the repeat loop outputs the times and temperatures by row
 for each non-empty data frame; else sleeps for 100 milliseconds if all
