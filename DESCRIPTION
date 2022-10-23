@@ -1,6 +1,6 @@
 Package: usbtc08r
 Title: USB 8-Channel Thermocouple for R
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: 
     person(given = "Roy",
            family = "Ratcliffe",
